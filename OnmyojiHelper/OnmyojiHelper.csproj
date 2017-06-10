@@ -95,6 +95,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170610074116_InitMigration.cs" />
+    <Compile Include="Migrations\20170610074116_InitMigration.designer.cs">
+      <DependentUpon>20170610074116_InitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\OnmyojiContextModelSnapshot.cs" />
     <Compile Include="Models\Battle.cs" />
     <Compile Include="Models\Bounty.cs" />
     <Compile Include="Models\Clue.cs" />

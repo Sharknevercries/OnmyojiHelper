@@ -8,9 +8,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OnmyojiHelper.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class StagePageViewModel : ViewModelBase
     {
-        public MainPageViewModel()
+        public StagePageViewModel()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {

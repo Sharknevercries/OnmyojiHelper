@@ -7,9 +7,9 @@ using System.Collections.ObjectModel;
 
 namespace OnmyojiHelper.Views
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class StagePage : Page
     {
-        public MainPage()
+        public StagePage()
         {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;

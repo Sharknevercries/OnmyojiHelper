@@ -7,12 +7,12 @@ using Windows.UI.Xaml;
 
 namespace OnmyojiHelper.ViewModels
 {
-    public class SettingsPageViewModel : ViewModelBase
+    public class SettingsPageViewModel : Mvvm.ViewModelBase
     {
         public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
     }
 
-    public class AboutPartViewModel : ViewModelBase
+    public class AboutPartViewModel : Mvvm.ViewModelBase
     {
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 

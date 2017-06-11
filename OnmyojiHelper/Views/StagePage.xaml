@@ -8,45 +8,44 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:OnmyojiHelper.Views"
+    xmlns:m="using:OnmyojiHelper.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mg="using:OnmyojiHelper.Models.Groups"
+    xmlns:mr="using:OnmyojiHelper.Models.Relations"
     xmlns:vm="using:OnmyojiHelper.ViewModels"
+    xmlns:wuxdata="using:Windows.UI.Xaml.Data"
     mc:Ignorable="d">
-
     <Page.DataContext>
-        <vm:StagePageViewModel x:Name="ViewModel" />
+        <Binding Path="StagePageViewModel" Source="{StaticResource Locator}" />
     </Page.DataContext>
 
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
-            <VisualState x:Name="VisualStateNarrow">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <!--  TODO: change properties for narrow view  -->
-                    <Setter Target="stateTextBox.Text" Value="Narrow Visual State" />
-                </VisualState.Setters>
-            </VisualState>
-            <VisualState x:Name="VisualStateNormal">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <!--  TODO: change properties for normal view  -->
-                    <Setter Target="stateTextBox.Text" Value="Normal Visual State" />
-                </VisualState.Setters>
-            </VisualState>
-            <VisualState x:Name="VisualStateWide">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <!--  TODO: change properties for wide view  -->
-                    <Setter Target="stateTextBox.Text" Value="Wide Visual State" />
-                </VisualState.Setters>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
+    <Page.Resources>
+        <CollectionViewSource
+            x:Name="cVSStageGroups"
+            IsSourceGrouped="True"
+            ItemsPath="Stages"
+            Source="{Binding StageGroups, Mode=OneWay}" />
+        <DataTemplate x:Key="stageZoomInItemTemplate" x:DataType="m:Stage">
+            <Grid>
+                <TextBlock Text="{x:Bind Title}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="stageZoomInGroupHeaderTemplate" x:DataType="mg:StageGroup">
+            <TextBlock Text="{x:Bind Category}" />
+        </DataTemplate>
+        <DataTemplate x:Key="stageZoomOutItemTemplate" x:DataType="wuxdata:ICollectionViewGroup">
+            <TextBlock Text="{x:Bind Group.(mg:StageGroup.Category)}" />
+        </DataTemplate>
+        <DataTemplate x:Key="battleItemTemplate" x:DataType="m:Battle">
+            <TextBlock Text="{x:Bind Title}" />
+        </DataTemplate>
+        <DataTemplate x:Key="shikigamiItemTemplate" x:DataType="mr:ShikigamiBattle">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Bind Shikigami.Name}" />
+                <TextBlock Text="{x:Bind Count}" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader
@@ -56,7 +55,76 @@
             RelativePanel.AlignTopWithPanel="True"
             Text="關卡" />
 
-        
+        <Grid
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="pageHeader">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="180" />
+                <ColumnDefinition Width="*" MinWidth="180" />
+                <ColumnDefinition Width="*" MinWidth="180" />
+            </Grid.ColumnDefinitions>
+            <SemanticZoom Grid.Column="0">
+                <SemanticZoom.ZoomedInView>
+                    <ListView
+                        x:Name="stageZoomInListView"
+                        ItemTemplate="{StaticResource stageZoomInItemTemplate}"
+                        ItemsSource="{x:Bind cVSStageGroups.View}"
+                        SelectionMode="Single">
+                        <ListView.GroupStyle>
+                            <GroupStyle HeaderTemplate="{StaticResource stageZoomInGroupHeaderTemplate}" />
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <ListView
+                        x:Name="stageZoomOutListView"
+                        ItemTemplate="{StaticResource stageZoomOutItemTemplate}"
+                        ItemsSource="{x:Bind cVSStageGroups.View.CollectionGroups}"
+                        SelectionMode="None" />
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+            <ListView
+                x:Name="battleListView"
+                Grid.Column="1"
+                ItemTemplate="{StaticResource battleItemTemplate}"
+                ItemsSource="{x:Bind stageZoomInListView.SelectedItem.(m:Stage.Battles), Mode=OneWay}" />
+            <ListView
+                x:Name="shikigamiListView"
+                Grid.Column="2"
+                ItemTemplate="{StaticResource shikigamiItemTemplate}"
+                ItemsSource="{x:Bind battleListView.SelectedItem.(m:Battle.ShikigamiBattles), Mode=OneWay}" />
+        </Grid>
 
     </RelativePanel>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+            <VisualState x:Name="VisualStateNarrow">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <!--  TODO: change properties for narrow view  -->
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="VisualStateNormal">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <!--  TODO: change properties for normal view  -->
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="VisualStateWide">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <!--  TODO: change properties for wide view  -->
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </Page>

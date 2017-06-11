@@ -5,32 +5,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
+using OnmyojiHelper.Models.Groups;
+using OnmyojiHelper.Services;
 
 namespace OnmyojiHelper.ViewModels
 {
-    public class StagePageViewModel : ViewModelBase
+    public class StagePageViewModel : Mvvm.ViewModelBase
     {
-        public StagePageViewModel()
+        private IEnumerable<StageGroup> _stageGroups;
+        public IEnumerable<StageGroup> StageGroups
         {
+            get { return _stageGroups; }
+            set { Set(ref _stageGroups, value); }
+        }
+
+        private IDataService _dataService;
+
+        public StagePageViewModel(IDataService dataService)
+        {
+            _dataService = dataService;
+
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 
             }
-        }
+            else
+            {
+                StageGroups = _dataService.GetAllStageGroups().ToList();
+            }
 
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
-        {
-            await Task.CompletedTask;
-        }
-
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
-        {
-            await Task.CompletedTask;
-        }
-
-        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
-        {
-            await Task.CompletedTask;
+            RaisePropertyChanged("StageGroups");
         }
     }
 }

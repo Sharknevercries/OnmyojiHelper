@@ -24,7 +24,7 @@
             x:Name="cVSStageGroups"
             IsSourceGrouped="True"
             ItemsPath="Stages"
-            Source="{Binding StageGroups, Mode=OneWay}" />
+            Source="{Binding StageGroups}" />
         <DataTemplate x:Key="stageZoomInItemTemplate" x:DataType="m:Stage">
             <Grid>
                 <TextBlock Text="{x:Bind Title}" />
@@ -55,20 +55,29 @@
             RelativePanel.AlignTopWithPanel="True"
             Text="關卡" />
 
+        <ProgressBar
+            Width="150"
+            Margin="5"
+            IsIndeterminate="True"
+            RelativePanel.Below="pageHeader"
+            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenTrueConverter}}" />
+
         <Grid
             RelativePanel.AlignBottomWithPanel="True"
             RelativePanel.AlignLeftWithPanel="True"
             RelativePanel.AlignRightWithPanel="True"
-            RelativePanel.Below="pageHeader">
+            RelativePanel.Below="pageHeader"
+            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenFalseConverter}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="180" />
-                <ColumnDefinition Width="*" MinWidth="180" />
-                <ColumnDefinition Width="*" MinWidth="180" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <SemanticZoom Grid.Column="0">
+            <SemanticZoom Grid.Column="0" MinWidth="180">
                 <SemanticZoom.ZoomedInView>
                     <ListView
                         x:Name="stageZoomInListView"
+                        MinWidth="180"
                         ItemTemplate="{StaticResource stageZoomInItemTemplate}"
                         ItemsSource="{x:Bind cVSStageGroups.View}"
                         SelectionMode="Single">
@@ -88,11 +97,13 @@
             <ListView
                 x:Name="battleListView"
                 Grid.Column="1"
+                MinWidth="180"
                 ItemTemplate="{StaticResource battleItemTemplate}"
                 ItemsSource="{x:Bind stageZoomInListView.SelectedItem.(m:Stage.Battles), Mode=OneWay}" />
             <ListView
                 x:Name="shikigamiListView"
                 Grid.Column="2"
+                MinWidth="180"
                 ItemTemplate="{StaticResource shikigamiItemTemplate}"
                 ItemsSource="{x:Bind battleListView.SelectedItem.(m:Battle.ShikigamiBattles), Mode=OneWay}" />
         </Grid>

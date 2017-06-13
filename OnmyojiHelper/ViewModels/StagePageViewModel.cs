@@ -7,11 +7,17 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using OnmyojiHelper.Models.Groups;
 using OnmyojiHelper.Services;
+using System.Collections.ObjectModel;
+using Windows.System.Threading;
+using Template10.Services.LoggingService;
+using OnmyojiHelper.Models;
 
 namespace OnmyojiHelper.ViewModels
 {
     public class StagePageViewModel : Mvvm.ViewModelBase
     {
+        public bool IsLoading { get; set; }
+
         private IEnumerable<StageGroup> _stageGroups;
         public IEnumerable<StageGroup> StageGroups
         {
@@ -27,14 +33,27 @@ namespace OnmyojiHelper.ViewModels
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                
             }
             else
             {
-                StageGroups = _dataService.GetAllStageGroups().ToList();
+            }
+        }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            StageGroups = null;
+
+            try
+            {
+                IsLoading = true;
+                StageGroups = _dataService.GetAllStageGroups();
+            }
+            finally
+            {
+                IsLoading = false;
             }
 
-            RaisePropertyChanged("StageGroups");
+            await Task.CompletedTask;
         }
     }
 }

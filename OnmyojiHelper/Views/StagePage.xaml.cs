@@ -12,7 +12,6 @@ namespace OnmyojiHelper.Views
         public StagePage()
         {
             InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
     }
 }

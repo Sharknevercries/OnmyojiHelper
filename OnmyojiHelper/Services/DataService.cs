@@ -21,7 +21,7 @@ namespace OnmyojiHelper.Services
                                         .ThenInclude(sb => sb.Shikigami)
                                .ToList();
 
-                foreach(var stage in stages)
+                foreach (var stage in stages)
                 {
                     stage.Battles = (from battle in stage.Battles
                                      orderby battle.Id ascending

@@ -16,7 +16,12 @@ namespace OnmyojiHelper.ViewModels
 {
     public class StagePageViewModel : Mvvm.ViewModelBase
     {
-        public bool IsLoading { get; set; }
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { Set(ref _isLoading, value); }
+        }
 
         private IEnumerable<StageGroup> _stageGroups;
         public IEnumerable<StageGroup> StageGroups

@@ -76,7 +76,7 @@
                         x:Name="stageZoomInListView"
                         MinWidth="180"
                         ItemTemplate="{StaticResource stageZoomInItemTemplate}"
-                        ItemsSource="{x:Bind cVSStageGroups.View}"
+                        ItemsSource="{x:Bind cVSStageGroups.View, Mode=OneWay}"
                         SelectionMode="Single">
                         <ListView.GroupStyle>
                             <GroupStyle HeaderTemplate="{StaticResource stageZoomInGroupHeaderTemplate}" />
@@ -87,7 +87,7 @@
                     <ListView
                         x:Name="stageZoomOutListView"
                         ItemTemplate="{StaticResource stageZoomOutItemTemplate}"
-                        ItemsSource="{x:Bind cVSStageGroups.View.CollectionGroups}"
+                        ItemsSource="{x:Bind cVSStageGroups.View.CollectionGroups, Mode=OneWay}"
                         SelectionMode="None" />
                 </SemanticZoom.ZoomedOutView>
             </SemanticZoom>

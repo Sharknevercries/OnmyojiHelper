@@ -28,15 +28,5 @@ namespace OnmyojiHelper.ViewModels
             SimpleIoc.Default.Register<StagePageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
         }
-
-        public StagePageViewModel StagePageViewModel
-        {
-            get { return SimpleIoc.Default.GetInstance<StagePageViewModel>(); }
-        }
-
-        public SettingsPageViewModel SettingPageViewModel
-        {
-            get { return SimpleIoc.Default.GetInstance<SettingsPageViewModel>(); }
-        }
     }
 }

@@ -15,9 +15,6 @@
     xmlns:vm="using:OnmyojiHelper.ViewModels"
     xmlns:wuxdata="using:Windows.UI.Xaml.Data"
     mc:Ignorable="d">
-    <Page.DataContext>
-        <Binding Path="StagePageViewModel" Source="{StaticResource Locator}" />
-    </Page.DataContext>
 
     <Page.Resources>
         <CollectionViewSource
@@ -60,14 +57,14 @@
             Margin="5"
             IsIndeterminate="True"
             RelativePanel.Below="pageHeader"
-            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenTrueConverter}}" />
+            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenTrueConverter}, Mode=TwoWay}" />
 
         <Grid
             RelativePanel.AlignBottomWithPanel="True"
             RelativePanel.AlignLeftWithPanel="True"
             RelativePanel.AlignRightWithPanel="True"
             RelativePanel.Below="pageHeader"
-            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenFalseConverter}}">
+            Visibility="{Binding IsLoading, Converter={StaticResource VisibilityWhenFalseConverter}, Mode=TwoWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

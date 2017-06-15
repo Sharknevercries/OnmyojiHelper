@@ -86,5 +86,17 @@ namespace OnmyojiHelper
             // TODO: add your long-running task here
             await NavigationService.NavigateAsync(typeof(Views.StagePage));
         }
+
+        public override INavigable ResolveForPage(Page page, NavigationService navigationService)
+        {
+            switch (page)
+            {
+                case StagePage p:
+                    return SimpleIoc.Default.GetInstance<StagePageViewModel>();
+                case SettingsPage p:
+                    return SimpleIoc.Default.GetInstance<SettingsPageViewModel>();
+            }
+            return base.ResolveForPage(page, navigationService);
+        }
     }
 }

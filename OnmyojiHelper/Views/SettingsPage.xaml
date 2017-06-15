@@ -12,10 +12,6 @@
       xmlns:vm="using:OnmyojiHelper.ViewModels"
       mc:Ignorable="d">
 
-    <Page.DataContext>
-        <Binding Path="SettingPageViewModel" Source="{StaticResource Locator}" />
-    </Page.DataContext>
-
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <VisualStateManager.VisualStateGroups>

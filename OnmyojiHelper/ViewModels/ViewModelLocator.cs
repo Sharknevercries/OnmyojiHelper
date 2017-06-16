@@ -28,6 +28,7 @@ namespace OnmyojiHelper.ViewModels
             SimpleIoc.Default.Register<StagePageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
             SimpleIoc.Default.Register<EditPageViewModel>();
+            SimpleIoc.Default.Register<StageEditPageViewModel>();
         }
     }
 }

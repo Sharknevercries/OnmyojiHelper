@@ -97,6 +97,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<SettingsPageViewModel>();
                 case EditPage p:
                     return SimpleIoc.Default.GetInstance<EditPageViewModel>();
+                case StageEditPage p:
+                    return SimpleIoc.Default.GetInstance<StageEditPageViewModel>();
             }
             return base.ResolveForPage(page, navigationService);
         }

@@ -12,7 +12,8 @@ namespace OnmyojiHelper.Services
 {
     public class DataService : IDataService
     {
-#region Stage
+        #region Stage
+
         public IEnumerable<StageGroup> GetAllStageGroups()
         {
             using (var db = new OnmyojiContext())
@@ -52,7 +53,7 @@ namespace OnmyojiHelper.Services
             {
                 var stage = db.Stages.FirstOrDefault(a => a.Id == s.Id);
 
-                if(stage == null)
+                if (stage == null)
                 {
                     LoggingService.WriteLine($"[Edit] Stage { s.Id } is null.", Severities.Warning);
                     return;
@@ -94,31 +95,70 @@ namespace OnmyojiHelper.Services
         {
             return s != null && !string.IsNullOrEmpty(s.Title);
         }
-#endregion
+
+        #endregion
+
+        #region Shikigami
 
         public IEnumerable<Shikigami> GetAllShikigamis()
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                return from s in db.Shikigamis.ToList()
+                       orderby s.Id ascending
+                       select s;
+            }
         }
 
         public void EditShikigami(Shikigami s)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var shikigami = db.Shikigamis.FirstOrDefault(a => a.Id == s.Id);
+
+                if (shikigami == null)
+                {
+                    LoggingService.WriteLine($"[Edit] Shikigami { s.Id } is null.", Severities.Warning);
+                    return;
+                }
+
+                shikigami.Name = s.Name;
+                shikigami.Rarity = s.Rarity;
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Edit] Shikigami { s.Id }.", Severities.Info);
+            }
         }
 
         public void AddShikigami(Shikigami s)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                db.Shikigamis.Add(s);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Add] Shikigami {s.Id}.", Severities.Info);
+            }
         }
 
         public void DeleteShikigami(Shikigami s)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var shikigami = db.Shikigamis.FirstOrDefault(a => a.Id == s.Id);
+
+                db.Shikigamis.Remove(shikigami);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Delete] Shikigami { s.Id }", Severities.Info);
+            }
         }
 
         public bool IsLegalShikigami(Shikigami s)
         {
-            throw new NotImplementedException();
+            return s != null && !string.IsNullOrEmpty(s.Name);
         }
+
+        #endregion
     }
 }

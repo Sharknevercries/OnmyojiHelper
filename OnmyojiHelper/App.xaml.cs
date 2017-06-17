@@ -18,6 +18,7 @@ using OnmyojiHelper.ViewModels;
 using Template10.Services.LoggingService;
 using System.Runtime.CompilerServices;
 using OnmyojiHelper.ViewModels.Stages;
+using OnmyojiHelper.ViewModels.Shikigamis;
 
 namespace OnmyojiHelper
 {
@@ -102,6 +103,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<StageEditPageViewModel>();
                 case Views.Stages.StageAddPage p:
                     return SimpleIoc.Default.GetInstance<StageAddPageViewModel>();
+                case Views.Shikigamis.ShikigamiAddPage p:
+                    return SimpleIoc.Default.GetInstance<ShikigamiAddPageViewModel>();
             }
             return base.ResolveForPage(page, navigationService);
         }

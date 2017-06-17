@@ -1,0 +1,74 @@
+﻿<Page
+    x:Class="OnmyojiHelper.Views.Shikigamis.ShikigamiAddPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OnmyojiHelper.Views.Shikigamis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c="using:Template10.Controls"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:OnmyojiHelper.Converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:ShikigamiRarityConverter x:Key="ShikigamiRarityConverter" />
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="新增式神">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Icon="Accept" Label="Add"  Command="{Binding AddCommand}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <StackPanel
+            x:Name="name"
+            Orientation="Horizontal"
+            RelativePanel.Below="pageHeader">
+            <TextBlock
+                x:Name="shikigamiName"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.Below="pageHeader"
+                Text="式神名稱" />
+
+            <TextBox
+                x:Name="shikigamiEditName"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                RelativePanel.Below="pageHeader"
+                RelativePanel.RightOf="shikigamiName"
+                PlaceholderText="Type the title of the stage here..."
+                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel
+            x:Name="rarity"
+            Orientation="Horizontal"
+            RelativePanel.Below="name">
+            <TextBlock
+                x:Name="shikigamiRarity"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                Text="式神稀有度" />
+
+            <ComboBox
+                Margin="12,6"
+                VerticalAlignment="Center"
+                SelectedIndex="{Binding Rarity, Converter={StaticResource ShikigamiRarityConverter}, Mode=TwoWay}">
+                <ComboBoxItem Content="SSR" />
+                <ComboBoxItem Content="SR" />
+                <ComboBoxItem Content="R" />
+                <ComboBoxItem Content="N" />
+                <ComboBoxItem Content="None" />
+            </ComboBox>
+        </StackPanel>
+    </RelativePanel>
+</Page>

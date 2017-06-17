@@ -86,6 +86,8 @@ namespace OnmyojiHelper.ViewModels
 
         public void GoToShikigamiAdd()
         {
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Shikigamis.ShikigamiAddPage));
         }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ShikigamiConverter.cs" />
     <Compile Include="Converters\StageConverter.cs" />
     <Compile Include="Migrations\20170616185124_FirstMigration.cs" />
     <Compile Include="Migrations\20170616185124_FirstMigration.designer.cs">
@@ -120,6 +121,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\EditPageViewModel.cs" />
+    <Compile Include="ViewModels\Shikigamis\ShikigamiAddPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StageAddPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StageEditPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StagePageViewModel.cs" />
@@ -130,6 +132,9 @@
     </Compile>
     <Compile Include="Views\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shikigamis\ShikigamiAddPage.xaml.cs">
+      <DependentUpon>ShikigamiAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Stages\StageAddPage.xaml.cs">
       <DependentUpon>StageAddPage.xaml</DependentUpon>
@@ -182,6 +187,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\EditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shikigamis\ShikigamiAddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

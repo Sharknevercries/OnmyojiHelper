@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using OnmyojiHelper;
-using OnmyojiHelper.Models.Enums;
 
 namespace OnmyojiHelper.Migrations
 {
@@ -116,9 +115,10 @@ namespace OnmyojiHelper.Migrations
 
             modelBuilder.Entity("OnmyojiHelper.Models.Battle", b =>
                 {
-                    b.HasOne("OnmyojiHelper.Models.Stage")
+                    b.HasOne("OnmyojiHelper.Models.Stage", "Stage")
                         .WithMany("Battles")
-                        .HasForeignKey("StageId");
+                        .HasForeignKey("StageId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("OnmyojiHelper.Models.Bounty", b =>

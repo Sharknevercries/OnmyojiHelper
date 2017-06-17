@@ -15,6 +15,8 @@ namespace OnmyojiHelper.Models
 
         public string Title { get; set; }
 
-        public ICollection<Relations.ShikigamiBattle> ShikigamiBattles { get; set; } 
+        public Stage Stage { get; set; }
+
+        public List<Relations.ShikigamiBattle> ShikigamiBattles { get; set; } 
     }
 }

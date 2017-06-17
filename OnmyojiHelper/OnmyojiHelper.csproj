@@ -97,9 +97,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StageConverter.cs" />
-    <Compile Include="Migrations\20170610074116_InitMigration.cs" />
-    <Compile Include="Migrations\20170610074116_InitMigration.designer.cs">
-      <DependentUpon>20170610074116_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170616185124_FirstMigration.cs" />
+    <Compile Include="Migrations\20170616185124_FirstMigration.designer.cs">
+      <DependentUpon>20170616185124_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\OnmyojiContextModelSnapshot.cs" />
     <Compile Include="Models\Battle.cs" />

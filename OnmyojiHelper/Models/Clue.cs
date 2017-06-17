@@ -14,6 +14,6 @@ namespace OnmyojiHelper.Models
 
         public string Keyword { get; set; }
 
-        public ICollection<Relations.BountyClue> BountyClues { get; set; }
+        public List<Relations.BountyClue> BountyClues { get; set; }
     }
 }

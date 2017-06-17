@@ -23,6 +23,7 @@
             Text="編輯關卡">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Save" Label="Save" Command="{Binding SaveCommand}" />
+                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding DeleteCommand}" />
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 

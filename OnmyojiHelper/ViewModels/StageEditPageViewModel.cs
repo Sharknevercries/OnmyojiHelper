@@ -23,12 +23,14 @@ namespace OnmyojiHelper.ViewModels
         }
 
         public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand DeleteCommand { get; private set; }
 
         public StageEditPageViewModel(IDataService dataService)
         {
             this._dataService = dataService;
 
             SaveCommand = new DelegateCommand(Save, SaveCommand_CanExecute);
+            DeleteCommand = new DelegateCommand(Delete);
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -42,7 +44,7 @@ namespace OnmyojiHelper.ViewModels
         {
             if (_stage != null)
             {
-                _dataService.EditStage(_stage);
+                _dataService.EditStage(Stage);
 
                 var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
                 nav.GoBack();
@@ -52,6 +54,14 @@ namespace OnmyojiHelper.ViewModels
         public bool SaveCommand_CanExecute()
         {
             return _dataService.IsLegalStage(Stage);
-        } 
+        }
+
+        public void Delete()
+        {
+            _dataService.DeleteStage(Stage);
+
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.GoBack();
+        }
     }
 }

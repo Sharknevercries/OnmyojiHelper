@@ -17,6 +17,6 @@ namespace OnmyojiHelper.Models
 
         public Enums.Rarity Rarity { get; set; }
 
-        public ICollection<Relations.ShikigamiBattle> ShikigamiBattles { get; set; }
+        public List<Relations.ShikigamiBattle> ShikigamiBattles { get; set; }
     }
 }

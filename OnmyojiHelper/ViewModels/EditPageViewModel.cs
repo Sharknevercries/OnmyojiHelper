@@ -22,6 +22,7 @@ namespace OnmyojiHelper.ViewModels
         }
 
         public StageEditPartViewModel StageEditPartViewModel => new StageEditPartViewModel(_dataService);
+        public ShikigamiEditPartViewModel ShikigamiEditPartViewModel => new ShikigamiEditPartViewModel(_dataService);
     }
 
     public class StageEditPartViewModel : Mvvm.ViewModelBase
@@ -58,6 +59,33 @@ namespace OnmyojiHelper.ViewModels
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.Navigate(typeof(Views.Stages.StageAddPage));
+        }
+    }
+
+    public class ShikigamiEditPartViewModel : Mvvm.ViewModelBase
+    {
+        private IDataService _dataService;
+
+        private ObservableCollection<Shikigami> _shikigamis;
+        public ObservableCollection<Shikigami> Shikigamis
+        {
+            get { return _shikigamis; }
+            set { Set(ref _shikigamis, value); }
+        }
+
+        public DelegateCommand ShikigamiAddCommand { get; private set; }
+
+        public ShikigamiEditPartViewModel(IDataService dataService)
+        {
+            this._dataService = dataService;
+
+            Shikigamis = new ObservableCollection<Shikigami>(_dataService.GetAllShikigamis());
+
+            ShikigamiAddCommand = new DelegateCommand(GoToShikigamiAdd);
+        }
+
+        public void GoToShikigamiAdd()
+        {
         }
     }
 }

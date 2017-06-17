@@ -35,8 +35,9 @@ namespace OnmyojiHelper.ViewModels.Stages
         {
             this._dataService = dataService;
 
-            Clear();
             AddCommand = new DelegateCommand(Add, AddCommand_CanExecute);
+
+            Clear();
         }
 
         public void Clear()

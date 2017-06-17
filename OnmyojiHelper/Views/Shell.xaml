@@ -9,7 +9,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:OnmyojiHelper.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:OnmyojiHelper.Views"
+    xmlns:v="using:OnmyojiHelper.Views"
+    xmlns:vstage="using:OnmyojiHelper.Views.Stages"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -17,7 +18,7 @@
 
         <Controls:HamburgerMenu.PrimaryButtons>
             <!--  mainpage button  -->
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:StagePage">
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="vstage:StagePage">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon
                         Width="48"
@@ -33,7 +34,7 @@
 
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  settingspage button  -->
-            <Controls:HamburgerButtonInfo x:Name="EditButton" PageType="views:EditPage">
+            <Controls:HamburgerButtonInfo x:Name="EditButton" PageType="v:EditPage">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
                     <SuppressNavigationTransitionInfo />
                 </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -51,7 +52,7 @@
             <Controls:HamburgerButtonInfo
                 x:Name="SettingsButton"
                 PageParameter="0"
-                PageType="views:SettingsPage">
+                PageType="v:SettingsPage">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
                     <SuppressNavigationTransitionInfo />
                 </Controls:HamburgerButtonInfo.NavigationTransitionInfo>

@@ -12,7 +12,7 @@ using Windows.System.Threading;
 using Template10.Services.LoggingService;
 using OnmyojiHelper.Models;
 
-namespace OnmyojiHelper.ViewModels
+namespace OnmyojiHelper.ViewModels.Stages
 {
     public class StagePageViewModel : Mvvm.ViewModelBase
     {

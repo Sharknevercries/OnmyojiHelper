@@ -9,18 +9,26 @@ using Template10.Common;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
 
-namespace OnmyojiHelper.ViewModels
+namespace OnmyojiHelper.ViewModels.Stages
 {
     public class StageEditPageViewModel : Mvvm.ViewModelBase
     {
         private IDataService _dataService;
 
-        private Stage _stage;
-        public Stage Stage
+        public int Id { get; set; }
+
+        private string _title;
+        public string Title
         {
-            get { return _stage; }
-            set { Set(ref _stage, value); SaveCommand.RaiseCanExecuteChanged(); }
+            get { return _title; }
+            set
+            {
+                Set(ref _title, value);
+                SaveCommand.RaiseCanExecuteChanged();
+            }
         }
+
+        public Models.Enums.StageCategory Category { get; set; }
 
         public DelegateCommand SaveCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
@@ -35,16 +43,25 @@ namespace OnmyojiHelper.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Stage = parameter as Stage;
+            var stage = parameter as Stage;
+
+            Id = stage.Id;
+            Title = stage.Title;
+            Category = stage.Category;
 
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         public void Save()
         {
-            if (_stage != null)
+            if (string.IsNullOrEmpty(Title))
             {
-                _dataService.EditStage(Stage);
+                _dataService.EditStage(new Stage()
+                {
+                    Id = this.Id,
+                    Title = this.Title,
+                    Category = this.Category,
+                });
 
                 var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
                 nav.GoBack();
@@ -53,12 +70,21 @@ namespace OnmyojiHelper.ViewModels
 
         public bool SaveCommand_CanExecute()
         {
-            return _dataService.IsLegalStage(Stage);
+            return _dataService.IsLegalStage(new Stage()
+            {
+                Title = this.Title,
+                Category = this.Category,
+            });
         }
 
         public void Delete()
         {
-            _dataService.DeleteStage(Stage);
+            _dataService.DeleteStage(new Stage()
+            {
+                Id = this.Id,
+                Title = this.Title,
+                Category = this.Category,
+            });
 
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.GoBack();

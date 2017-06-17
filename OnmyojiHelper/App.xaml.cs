@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight.Ioc;
 using OnmyojiHelper.ViewModels;
 using Template10.Services.LoggingService;
 using System.Runtime.CompilerServices;
+using OnmyojiHelper.ViewModels.Stages;
 
 namespace OnmyojiHelper
 {
@@ -84,21 +85,23 @@ namespace OnmyojiHelper
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // TODO: add your long-running task here
-            await NavigationService.NavigateAsync(typeof(Views.StagePage));
+            await NavigationService.NavigateAsync(typeof(Views.Stages.StagePage));
         }
 
         public override INavigable ResolveForPage(Page page, NavigationService navigationService)
         {
             switch (page)
             {
-                case StagePage p:
+                case Views.Stages.StagePage p:
                     return SimpleIoc.Default.GetInstance<StagePageViewModel>();
                 case SettingsPage p:
                     return SimpleIoc.Default.GetInstance<SettingsPageViewModel>();
                 case EditPage p:
                     return SimpleIoc.Default.GetInstance<EditPageViewModel>();
-                case StageEditPage p:
+                case Views.Stages.StageEditPage p:
                     return SimpleIoc.Default.GetInstance<StageEditPageViewModel>();
+                case Views.Stages.StageAddPage p:
+                    return SimpleIoc.Default.GetInstance<StageAddPageViewModel>();
             }
             return base.ResolveForPage(page, navigationService);
         }

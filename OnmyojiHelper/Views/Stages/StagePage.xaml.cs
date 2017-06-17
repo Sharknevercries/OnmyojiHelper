@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 
-namespace OnmyojiHelper.Views
+namespace OnmyojiHelper.Views.Stages
 {
     public sealed partial class StagePage : Page
     {

@@ -120,8 +120,9 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\EditPageViewModel.cs" />
-    <Compile Include="ViewModels\StageEditPageViewModel.cs" />
-    <Compile Include="ViewModels\StagePageViewModel.cs" />
+    <Compile Include="ViewModels\Stages\StageAddPageViewModel.cs" />
+    <Compile Include="ViewModels\Stages\StageEditPageViewModel.cs" />
+    <Compile Include="ViewModels\Stages\StagePageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Busy.xaml.cs">
@@ -130,10 +131,13 @@
     <Compile Include="Views\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StageEditPage.xaml.cs">
+    <Compile Include="Views\Stages\StageAddPage.xaml.cs">
+      <DependentUpon>StageAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stages\StageEditPage.xaml.cs">
       <DependentUpon>StageEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StagePage.xaml.cs">
+    <Compile Include="Views\Stages\StagePage.xaml.cs">
       <DependentUpon>StagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
@@ -181,11 +185,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StageEditPage.xaml">
+    <Page Include="Views\Stages\StageAddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StagePage.xaml">
+    <Page Include="Views\Stages\StageEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stages\StagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

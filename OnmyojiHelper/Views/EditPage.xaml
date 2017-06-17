@@ -52,7 +52,8 @@
                         Grid.Row="1"
                         Margin="5,12"
                         HorizontalAlignment="Right"
-                        Content="Add" />
+                        Content="Add"
+                        Command="{Binding StageAddCommand}" />
                 </Grid>
             </PivotItem>
             <PivotItem Header="式神" />

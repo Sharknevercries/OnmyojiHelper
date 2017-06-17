@@ -35,7 +35,8 @@ namespace OnmyojiHelper.ViewModels
             set { Set(ref _stages, value); }
         }
 
-        public DelegateCommand<ItemClickEventArgs> StageItemClickedCommand { get; set; }
+        public DelegateCommand<ItemClickEventArgs> StageItemClickedCommand { get; private set; }
+        public DelegateCommand StageAddCommand { get; private set; }
            
 
         public StageEditPartViewModel(IDataService dataService)
@@ -44,12 +45,19 @@ namespace OnmyojiHelper.ViewModels
 
             Stages = new ObservableCollection<Stage>(_dataService.GetAllStages());
             StageItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToStageEdit);
+            StageAddCommand = new DelegateCommand(GoToStageAdd);
         }
 
         public void GoToStageEdit(ItemClickEventArgs e)
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-            nav.Navigate(typeof(Views.StageEditPage), (Stage)e.ClickedItem);
+            nav.Navigate(typeof(Views.Stages.StageEditPage), (Stage)e.ClickedItem);
+        }
+
+        public void GoToStageAdd()
+        {
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Stages.StageAddPage));
         }
     }
 }

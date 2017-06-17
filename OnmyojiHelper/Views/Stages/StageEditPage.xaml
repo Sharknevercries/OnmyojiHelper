@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="OnmyojiHelper.Views.StageEditPage"
+    x:Class="OnmyojiHelper.Views.Stages.StageEditPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="using:OnmyojiHelper.Converters"
@@ -45,7 +45,7 @@
                 VerticalAlignment="Center"
                 RelativePanel.Below="pageHeader"
                 RelativePanel.RightOf="stageTitle"
-                Text="{Binding Stage.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <StackPanel
@@ -61,7 +61,7 @@
             <ComboBox
                 Margin="12,6"
                 VerticalAlignment="Center"
-                SelectedIndex="{Binding Stage.Category, Converter={StaticResource StageCategoryConverter}, Mode=TwoWay}">
+                SelectedIndex="{Binding Category, Converter={StaticResource StageCategoryConverter}, Mode=TwoWay}">
                 <ComboBoxItem Content="NormalDiscovery" />
                 <ComboBoxItem Content="HardDiscovery" />
                 <ComboBoxItem Content="RoyalSoul" />

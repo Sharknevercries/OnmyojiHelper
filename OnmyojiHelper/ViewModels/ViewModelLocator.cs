@@ -25,10 +25,11 @@ namespace OnmyojiHelper.ViewModels
             }
 
             //Register your services used here
-            SimpleIoc.Default.Register<StagePageViewModel>();
+            SimpleIoc.Default.Register<Stages.StagePageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
             SimpleIoc.Default.Register<EditPageViewModel>();
-            SimpleIoc.Default.Register<StageEditPageViewModel>();
+            SimpleIoc.Default.Register<Stages.StageEditPageViewModel>();
+            SimpleIoc.Default.Register<Stages.StageAddPageViewModel>();
         }
     }
 }

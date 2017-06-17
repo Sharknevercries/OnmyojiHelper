@@ -160,5 +160,34 @@ namespace OnmyojiHelper.Services
         }
 
         #endregion
+
+        #region Clue
+
+        public IEnumerable<Clue> GetAllClues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditClue(Clue c)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddClue(Clue c)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteClue(Clue c)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsLegalClue(Clue c)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

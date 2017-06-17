@@ -24,5 +24,10 @@ namespace OnmyojiHelper.Services
         void DeleteShikigami(Shikigami s);
         bool IsLegalShikigami(Shikigami s);
 
+        IEnumerable<Clue> GetAllClues();
+        void EditClue(Clue c);
+        void AddClue(Clue c);
+        void DeleteClue(Clue c);
+        bool IsLegalClue(Clue c);
     }
 }

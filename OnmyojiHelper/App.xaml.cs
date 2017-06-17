@@ -19,6 +19,7 @@ using Template10.Services.LoggingService;
 using System.Runtime.CompilerServices;
 using OnmyojiHelper.ViewModels.Stages;
 using OnmyojiHelper.ViewModels.Shikigamis;
+using OnmyojiHelper.ViewModels.Clues;
 
 namespace OnmyojiHelper
 {
@@ -85,7 +86,6 @@ namespace OnmyojiHelper
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            // TODO: add your long-running task here
             await NavigationService.NavigateAsync(typeof(Views.Stages.StagePage));
         }
 
@@ -107,7 +107,10 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<ShikigamiAddPageViewModel>();
                 case Views.Shikigamis.ShikigamiEditPage p:
                     return SimpleIoc.Default.GetInstance<ShikigamiEditPageViewModel>();
+                case Views.Clues.ClueAddPage p:
+                    return SimpleIoc.Default.GetInstance<ClueAddPageViewModel>();
             }
+
             return base.ResolveForPage(page, navigationService);
         }
     }

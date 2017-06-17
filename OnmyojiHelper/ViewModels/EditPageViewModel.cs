@@ -23,6 +23,7 @@ namespace OnmyojiHelper.ViewModels
 
         public StageEditPartViewModel StageEditPartViewModel => new StageEditPartViewModel(_dataService);
         public ShikigamiEditPartViewModel ShikigamiEditPartViewModel => new ShikigamiEditPartViewModel(_dataService);
+        public ClueEditPartViewModel ClueEditPartViewModel => new ClueEditPartViewModel(_dataService);
     }
 
     public class StageEditPartViewModel : Mvvm.ViewModelBase
@@ -96,6 +97,42 @@ namespace OnmyojiHelper.ViewModels
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.Navigate(typeof(Views.Shikigamis.ShikigamiEditPage), (Shikigami)e.ClickedItem);
+        }
+    }
+
+    public class ClueEditPartViewModel : Mvvm.ViewModelBase
+    {
+        private IDataService _dataService;
+
+        private ObservableCollection<Clue> _clues;
+        public ObservableCollection<Clue> Clues
+        {
+            get { return _clues; }
+            set { Set(ref _clues, value); }
+        }
+
+        public DelegateCommand ClueAddCommand { get; private set; }
+        public DelegateCommand<ItemClickEventArgs> ClueItemClickedCommand { get; private set; }
+
+        public ClueEditPartViewModel(IDataService dataService)
+        {
+            this._dataService = dataService;
+
+            _clues = new ObservableCollection<Clue>(_dataService.GetAllClues());
+
+            ClueAddCommand = new DelegateCommand(GoToClueAdd);
+            ClueItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToClueEdit);
+        }
+
+        public void GoToClueAdd()
+        {
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Clues.ClueAddPage));
+        }
+
+        public void GoToClueEdit(ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

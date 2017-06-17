@@ -32,6 +32,7 @@ namespace OnmyojiHelper.ViewModels
             SimpleIoc.Default.Register<Stages.StageAddPageViewModel>();
             SimpleIoc.Default.Register<Shikigamis.ShikigamiAddPageViewModel>();
             SimpleIoc.Default.Register<Shikigamis.ShikigamiEditPageViewModel>();
+            SimpleIoc.Default.Register<Clues.ClueAddPageViewModel>();
         }
     }
 }

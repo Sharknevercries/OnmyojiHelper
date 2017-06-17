@@ -105,6 +105,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<StageAddPageViewModel>();
                 case Views.Shikigamis.ShikigamiAddPage p:
                     return SimpleIoc.Default.GetInstance<ShikigamiAddPageViewModel>();
+                case Views.Shikigamis.ShikigamiEditPage p:
+                    return SimpleIoc.Default.GetInstance<ShikigamiEditPageViewModel>();
             }
             return base.ResolveForPage(page, navigationService);
         }

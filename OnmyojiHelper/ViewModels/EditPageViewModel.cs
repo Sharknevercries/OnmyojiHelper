@@ -74,6 +74,7 @@ namespace OnmyojiHelper.ViewModels
         }
 
         public DelegateCommand ShikigamiAddCommand { get; private set; }
+        public DelegateCommand<ItemClickEventArgs> ShikigamiItemClickedCommand { get; private set; }
 
         public ShikigamiEditPartViewModel(IDataService dataService)
         {
@@ -82,12 +83,19 @@ namespace OnmyojiHelper.ViewModels
             Shikigamis = new ObservableCollection<Shikigami>(_dataService.GetAllShikigamis());
 
             ShikigamiAddCommand = new DelegateCommand(GoToShikigamiAdd);
+            ShikigamiItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToShikigamiEdit);
         }
 
         public void GoToShikigamiAdd()
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.Navigate(typeof(Views.Shikigamis.ShikigamiAddPage));
+        }
+
+        public void GoToShikigamiEdit(ItemClickEventArgs e)
+        {
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Shikigamis.ShikigamiEditPage), (Shikigami)e.ClickedItem);
         }
     }
 }

@@ -122,6 +122,7 @@
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\EditPageViewModel.cs" />
     <Compile Include="ViewModels\Shikigamis\ShikigamiAddPageViewModel.cs" />
+    <Compile Include="ViewModels\Shikigamis\ShikigamiEditPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StageAddPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StageEditPageViewModel.cs" />
     <Compile Include="ViewModels\Stages\StagePageViewModel.cs" />
@@ -135,6 +136,9 @@
     </Compile>
     <Compile Include="Views\Shikigamis\ShikigamiAddPage.xaml.cs">
       <DependentUpon>ShikigamiAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shikigamis\ShikigamiEditPage.xaml.cs">
+      <DependentUpon>ShikigamiEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Stages\StageAddPage.xaml.cs">
       <DependentUpon>StageAddPage.xaml</DependentUpon>
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Shikigamis\ShikigamiAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shikigamis\ShikigamiEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

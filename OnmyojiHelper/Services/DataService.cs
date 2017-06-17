@@ -165,27 +165,59 @@ namespace OnmyojiHelper.Services
 
         public IEnumerable<Clue> GetAllClues()
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                return from c in db.Clues.ToList()
+                       orderby c.Id ascending
+                       select c;
+            }
         }
 
         public void EditClue(Clue c)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var clue = db.Clues.FirstOrDefault(a => a.Id == c.Id);
+
+                if (clue == null)
+                {
+                    LoggingService.WriteLine($"[Edit] Clue { c.Id } is null.", Severities.Warning);
+                    return;
+                }
+
+                db.SaveChanges();
+                LoggingService.WriteLine($"[Edit] Clue { c.Id }.", Severities.Info);
+            } 
         }
 
         public void AddClue(Clue c)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                db.Clues.Add(c);
+
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Add] Clue {c.Id}.", Severities.Info);
+            }
         }
 
         public void DeleteClue(Clue c)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var clue = db.Clues.FirstOrDefault(a => a.Id == c.Id);
+                db.Clues.Remove(clue);
+
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Delete] Clue { c.Id }", Severities.Info);
+            }
         }
 
         public bool IsLegalClue(Clue c)
         {
-            throw new NotImplementedException();
+            return !string.IsNullOrEmpty(c.Keyword);
         }
 
         #endregion

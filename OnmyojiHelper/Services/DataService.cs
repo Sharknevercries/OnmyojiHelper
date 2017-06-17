@@ -94,6 +94,31 @@ namespace OnmyojiHelper.Services
         {
             return s != null && !string.IsNullOrEmpty(s.Title);
         }
-        #endregion
+#endregion
+
+        public IEnumerable<Shikigami> GetAllShikigamis()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditShikigami(Shikigami s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddShikigami(Shikigami s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteShikigami(Shikigami s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsLegalShikigami(Shikigami s)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

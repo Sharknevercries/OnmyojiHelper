@@ -121,6 +121,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\Clues\ClueAddPageViewModel.cs" />
+    <Compile Include="ViewModels\Clues\ClueEditPageViewModel.cs" />
     <Compile Include="ViewModels\EditPageViewModel.cs" />
     <Compile Include="ViewModels\Shikigamis\ShikigamiAddPageViewModel.cs" />
     <Compile Include="ViewModels\Shikigamis\ShikigamiEditPageViewModel.cs" />
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Views\Clues\ClueAddPage.xaml.cs">
       <DependentUpon>ClueAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clues\ClueEditPage.xaml.cs">
+      <DependentUpon>ClueEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
@@ -195,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Clues\ClueAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clues\ClueEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

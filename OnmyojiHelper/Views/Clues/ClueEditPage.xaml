@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="OnmyojiHelper.Views.Clues.ClueEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OnmyojiHelper.Views.Clues"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="編輯線索">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Icon="Save" Label="Save" Command="{Binding SaveCommand}" />
+                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding DeleteCommand}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <StackPanel
+            x:Name="name"
+            Orientation="Horizontal"
+            RelativePanel.Below="pageHeader">
+            <TextBlock
+                x:Name="clueKeyword"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.Below="pageHeader"
+                Text="關鍵字" />
+
+            <TextBox
+                x:Name="clueEditKeyword"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                RelativePanel.Below="pageHeader"
+                RelativePanel.RightOf="clueKeyword"
+                PlaceholderText="Type the keyword of the clue here..."
+                Text="{Binding Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+        </StackPanel>
+    </RelativePanel>
+</Page>

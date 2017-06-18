@@ -83,7 +83,6 @@ namespace OnmyojiHelper.Services
             using (var db = new OnmyojiContext())
             {
                 var stage = db.Stages.FirstOrDefault(a => a.Id == s.Id);
-
                 db.Stages.Remove(stage);
                 db.SaveChanges();
 
@@ -146,7 +145,6 @@ namespace OnmyojiHelper.Services
             using (var db = new OnmyojiContext())
             {
                 var shikigami = db.Shikigamis.FirstOrDefault(a => a.Id == s.Id);
-
                 db.Shikigamis.Remove(shikigami);
                 db.SaveChanges();
 
@@ -185,6 +183,7 @@ namespace OnmyojiHelper.Services
                     return;
                 }
 
+                clue.Keyword = c.Keyword;
                 db.SaveChanges();
                 LoggingService.WriteLine($"[Edit] Clue { c.Id }.", Severities.Info);
             } 
@@ -195,7 +194,6 @@ namespace OnmyojiHelper.Services
             using (var db = new OnmyojiContext())
             {
                 db.Clues.Add(c);
-
                 db.SaveChanges();
 
                 LoggingService.WriteLine($"[Add] Clue {c.Id}.", Severities.Info);
@@ -208,7 +206,6 @@ namespace OnmyojiHelper.Services
             {
                 var clue = db.Clues.FirstOrDefault(a => a.Id == c.Id);
                 db.Clues.Remove(clue);
-
                 db.SaveChanges();
 
                 LoggingService.WriteLine($"[Delete] Clue { c.Id }", Severities.Info);

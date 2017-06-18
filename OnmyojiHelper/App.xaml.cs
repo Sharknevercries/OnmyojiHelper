@@ -109,6 +109,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<ShikigamiEditPageViewModel>();
                 case Views.Clues.ClueAddPage p:
                     return SimpleIoc.Default.GetInstance<ClueAddPageViewModel>();
+                case Views.Clues.ClueEditPage p:
+                    return SimpleIoc.Default.GetInstance<ClueEditPageViewModel>();
             }
 
             return base.ResolveForPage(page, navigationService);

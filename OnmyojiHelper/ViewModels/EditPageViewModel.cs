@@ -132,7 +132,8 @@ namespace OnmyojiHelper.ViewModels
 
         public void GoToClueEdit(ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Clues.ClueEditPage), (Clue)e.ClickedItem);
         }
     }
 }

@@ -218,5 +218,66 @@ namespace OnmyojiHelper.Services
         }
 
         #endregion
+
+        #region Bounty
+
+        public IEnumerable<Bounty> GetAllBounties()
+        {
+            using (var db = new OnmyojiContext())
+            {
+                return from b in db.Bounties.ToList()
+                       orderby b.Id ascending
+                       select b;
+            }
+        }
+
+        public void EditBounty(Bounty b)
+        {
+            using (var db = new OnmyojiContext())
+            {
+                var bounty = db.Bounties.FirstOrDefault(a => a.Id == b.Id);
+
+                if (bounty == null)
+                {
+                    LoggingService.WriteLine($"[Edit] Bounty { b.Id } is null.", Severities.Warning);
+                    return;
+                }
+
+                bounty.BountyClues = b.BountyClues;
+                bounty.Shikigami = b.Shikigami;
+                db.SaveChanges();
+                LoggingService.WriteLine($"[Edit] Bounty { b.Id }.", Severities.Info);
+            }
+        }
+
+        public void AddBounty(Bounty b)
+        {
+            using (var db = new OnmyojiContext())
+            {
+                db.Bounties.Add(b);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Add] Bounty {b.Id}.", Severities.Info);
+            }
+        }
+
+        public void DeleteBounty(Bounty b)
+        {
+            using (var db = new OnmyojiContext())
+            {
+                var bounty = db.Bounties.FirstOrDefault(a => a.Id == b.Id);
+                db.Bounties.Remove(bounty);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Delete] Bounty { b.Id }", Severities.Info);
+            }
+        }
+
+        public bool IsLegalBounty(Bounty b)
+        {
+            return b.Shikigami != null;
+        }
+
+        #endregion
     }
 }

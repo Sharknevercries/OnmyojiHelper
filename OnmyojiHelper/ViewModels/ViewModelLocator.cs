@@ -34,6 +34,7 @@ namespace OnmyojiHelper.ViewModels
             SimpleIoc.Default.Register<Shikigamis.ShikigamiEditPageViewModel>();
             SimpleIoc.Default.Register<Clues.ClueAddPageViewModel>();
             SimpleIoc.Default.Register<Clues.ClueEditPageViewModel>();
+            SimpleIoc.Default.Register<Bounties.BountyAddPageViewModel>();
         }
     }
 }

@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="OnmyojiHelper.Views.Bounties.BountyAddPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OnmyojiHelper.Views.Bounties"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:OnmyojiHelper.Converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+    </Page.Resources>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader
+            x:Name="pageHeader"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            Text="新增懸賞">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Icon="Accept" Label="Add"  Command="{Binding AddCommand}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <StackPanel
+            x:Name="shikigami"
+            Orientation="Horizontal"
+            RelativePanel.Below="pageHeader">
+            <TextBlock
+                x:Name="bountyShikigami"
+                Margin="12,6"
+                VerticalAlignment="Center"
+                Text="目標式神" />
+
+            <ComboBox x:Name="bountyEditShikigami"
+                      Margin="12, 6"
+                      ItemsSource="{Binding Shikigamis}"
+                      SelectedItem="{Binding Shikigami, Mode=TwoWay}"
+                      VerticalAlignment="Center">
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel x:Name="clue" Orientation="Horizontal" RelativePanel.Below="shikigami">
+            <TextBlock x:Name="bountyClue"
+                       Margin="12, 6"
+                       VerticalAlignment="Center"
+                       Text="目標線索" />
+        </StackPanel>
+    </RelativePanel>
+</Page>

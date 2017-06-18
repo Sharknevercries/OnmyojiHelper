@@ -20,6 +20,7 @@ using System.Runtime.CompilerServices;
 using OnmyojiHelper.ViewModels.Stages;
 using OnmyojiHelper.ViewModels.Shikigamis;
 using OnmyojiHelper.ViewModels.Clues;
+using OnmyojiHelper.ViewModels.Bounties;
 
 namespace OnmyojiHelper
 {
@@ -111,6 +112,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<ClueAddPageViewModel>();
                 case Views.Clues.ClueEditPage p:
                     return SimpleIoc.Default.GetInstance<ClueEditPageViewModel>();
+                case Views.Bounties.BountyAddPage p:
+                    return SimpleIoc.Default.GetInstance<BountyAddPageViewModel>();
             }
 
             return base.ResolveForPage(page, navigationService);

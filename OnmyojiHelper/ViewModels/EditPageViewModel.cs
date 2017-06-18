@@ -24,6 +24,7 @@ namespace OnmyojiHelper.ViewModels
         public StageEditPartViewModel StageEditPartViewModel => new StageEditPartViewModel(_dataService);
         public ShikigamiEditPartViewModel ShikigamiEditPartViewModel => new ShikigamiEditPartViewModel(_dataService);
         public ClueEditPartViewModel ClueEditPartViewModel => new ClueEditPartViewModel(_dataService);
+        public BountyEditPartViewModel BountyEditPartViewModel => new BountyEditPartViewModel(_dataService);
     }
 
     public class StageEditPartViewModel : Mvvm.ViewModelBase
@@ -134,6 +135,40 @@ namespace OnmyojiHelper.ViewModels
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.Navigate(typeof(Views.Clues.ClueEditPage), (Clue)e.ClickedItem);
+        }
+    }
+
+    public class BountyEditPartViewModel : Mvvm.ViewModelBase
+    {
+        private IDataService _dataService;
+
+        private ObservableCollection<Bounty> _bounties;
+        public ObservableCollection<Bounty> Bounties
+        {
+            get { return _bounties; }
+            set { Set(ref _bounties, value); }
+        }
+
+        public DelegateCommand BountyAddCommand { get; private set; }
+        public DelegateCommand<ItemClickEventArgs> BountyItemClickedCommand { get; private set; }
+
+        public BountyEditPartViewModel(IDataService dataService)
+        {
+            this._dataService = dataService;
+
+            BountyAddCommand = new DelegateCommand(GoToBountyAdd);
+            BountyItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToBountyEdit);
+        }
+
+        public void GoToBountyAdd()
+        {
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Bounties.BountyAddPage));
+        }
+
+        public void GoToBountyEdit(ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

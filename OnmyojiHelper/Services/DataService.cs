@@ -165,6 +165,7 @@ namespace OnmyojiHelper.Services
         {
             using (var db = new OnmyojiContext())
             {
+
                 return from c in db.Clues.ToList()
                        orderby c.Id ascending
                        select c;
@@ -225,7 +226,11 @@ namespace OnmyojiHelper.Services
         {
             using (var db = new OnmyojiContext())
             {
-                return from b in db.Bounties.ToList()
+                var bounties = db.Bounties
+                    .Include(b => b.BountyClues)
+                    .ToList();
+
+                return from b in bounties
                        orderby b.Id ascending
                        select b;
             }

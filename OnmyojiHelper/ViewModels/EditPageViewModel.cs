@@ -156,6 +156,8 @@ namespace OnmyojiHelper.ViewModels
         {
             this._dataService = dataService;
 
+            Bounties = new ObservableCollection<Bounty>(_dataService.GetAllBounties());
+
             BountyAddCommand = new DelegateCommand(GoToBountyAdd);
             BountyItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToBountyEdit);
         }

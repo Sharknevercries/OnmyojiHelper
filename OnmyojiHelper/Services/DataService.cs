@@ -227,7 +227,7 @@ namespace OnmyojiHelper.Services
             using (var db = new OnmyojiContext())
             {
                 var bounties = db.Bounties
-                    .Include(b => b.BountyClues)
+                    .Include(b => b.Shikigami)
                     .ToList();
 
                 return from b in bounties

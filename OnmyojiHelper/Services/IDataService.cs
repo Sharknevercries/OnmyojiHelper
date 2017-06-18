@@ -29,5 +29,11 @@ namespace OnmyojiHelper.Services
         void AddClue(Clue c);
         void DeleteClue(Clue c);
         bool IsLegalClue(Clue c);
+
+        IEnumerable<Bounty> GetAllBounties();
+        void EditBounty(Bounty b);
+        void AddBounty(Bounty b);
+        void DeleteBounty(Bounty b);
+        bool IsLegalBounty(Bounty b);
     }
 }

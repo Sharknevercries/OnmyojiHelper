@@ -9,7 +9,7 @@ using OnmyojiHelper.Models.Enums;
 namespace OnmyojiHelper.Migrations
 {
     [DbContext(typeof(OnmyojiContext))]
-    [Migration("20170616185124_FirstMigration")]
+    [Migration("20170619175053_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace OnmyojiHelper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ShikigamiId");
+                    b.Property<int>("ShikigamiId");
 
                     b.HasKey("Id");
 
@@ -127,7 +127,8 @@ namespace OnmyojiHelper.Migrations
                 {
                     b.HasOne("OnmyojiHelper.Models.Shikigami", "Shikigami")
                         .WithMany()
-                        .HasForeignKey("ShikigamiId");
+                        .HasForeignKey("ShikigamiId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("OnmyojiHelper.Models.Relations.BountyClue", b =>

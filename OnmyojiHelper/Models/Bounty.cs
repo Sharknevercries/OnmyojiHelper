@@ -12,6 +12,7 @@ namespace OnmyojiHelper.Models
     {
         public int Id { get; set; }
 
+        public int ShikigamiId { get; set; }
         public Shikigami Shikigami { get; set; }
 
         public List<Relations.BountyClue> BountyClues { get; set; }

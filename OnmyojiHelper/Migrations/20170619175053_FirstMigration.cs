@@ -55,7 +55,7 @@ namespace OnmyojiHelper.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ShikigamiId = table.Column<int>(nullable: true)
+                    ShikigamiId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +65,7 @@ namespace OnmyojiHelper.Migrations
                         column: x => x.ShikigamiId,
                         principalTable: "Shikigami",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

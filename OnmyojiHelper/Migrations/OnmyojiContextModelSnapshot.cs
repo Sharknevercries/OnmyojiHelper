@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using OnmyojiHelper;
+using OnmyojiHelper.Models.Enums;
 
 namespace OnmyojiHelper.Migrations
 {
@@ -36,7 +37,7 @@ namespace OnmyojiHelper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ShikigamiId");
+                    b.Property<int>("ShikigamiId");
 
                     b.HasKey("Id");
 
@@ -125,7 +126,8 @@ namespace OnmyojiHelper.Migrations
                 {
                     b.HasOne("OnmyojiHelper.Models.Shikigami", "Shikigami")
                         .WithMany()
-                        .HasForeignKey("ShikigamiId");
+                        .HasForeignKey("ShikigamiId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("OnmyojiHelper.Models.Relations.BountyClue", b =>

@@ -35,5 +35,10 @@ namespace OnmyojiHelper.Services
         void AddBounty(Bounty b);
         void DeleteBounty(Bounty b);
         bool IsLegalBounty(Bounty b);
+
+        IEnumerable<Battle> GetAllBattles();
+        void EditBattle(Battle b);
+        void AddBattle(Battle b);
+        void DeleteBattle(Battle b);
     }
 }

@@ -292,5 +292,29 @@ namespace OnmyojiHelper.Services
         }
 
         #endregion
+
+        #region Battle
+
+        public IEnumerable<Battle> GetAllBattles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditBattle(Battle b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddBattle(Battle b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBattle(Battle b)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

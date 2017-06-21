@@ -133,6 +133,9 @@
     <Compile Include="ViewModels\Stages\StagePageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Battles\BattleAddPage.xaml.cs">
+      <DependentUpon>BattleAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Bounties\BountyAddPage.xaml.cs">
       <DependentUpon>BountyAddPage.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Battles\BattleAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Bounties\BountyAddPage.xaml">
       <SubType>Designer</SubType>

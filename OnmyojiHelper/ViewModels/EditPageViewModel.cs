@@ -25,6 +25,7 @@ namespace OnmyojiHelper.ViewModels
         public ShikigamiEditPartViewModel ShikigamiEditPartViewModel => new ShikigamiEditPartViewModel(_dataService);
         public ClueEditPartViewModel ClueEditPartViewModel => new ClueEditPartViewModel(_dataService);
         public BountyEditPartViewModel BountyEditPartViewModel => new BountyEditPartViewModel(_dataService);
+        public BattleEditPartViewModel BattleEditPartViewModel => new BattleEditPartViewModel(_dataService);
     }
 
     public class StageEditPartViewModel : Mvvm.ViewModelBase
@@ -172,6 +173,41 @@ namespace OnmyojiHelper.ViewModels
         {
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.Navigate(typeof(Views.Bounties.BountyEditPage), (Bounty)e.ClickedItem);
+        }
+    }
+
+    public class BattleEditPartViewModel : Mvvm.ViewModelBase
+    {
+        private IDataService _dataService;
+
+        private ObservableCollection<Battle> _battles;
+        public ObservableCollection<Battle> Battles
+        {
+            get { return _battles; }
+            set { Set(ref _battles, value); }
+        }
+
+        public DelegateCommand BattleAddCommand { get; private set; }
+        public DelegateCommand<ItemClickEventArgs> BattleItemClickedCommand { get; private set; }
+
+        public BattleEditPartViewModel(IDataService dataService)
+        {
+            this._dataService = dataService;
+
+            Battles = new ObservableCollection<Battle>(_dataService.GetAllBattles());
+
+            BattleAddCommand = new DelegateCommand(GoToBattleAdd);
+            BattleItemClickedCommand = new DelegateCommand<ItemClickEventArgs>(GoToBattleEdit);
+        }
+
+        public void GoToBattleAdd()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GoToBattleEdit(ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

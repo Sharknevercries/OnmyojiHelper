@@ -228,6 +228,7 @@ namespace OnmyojiHelper.Services
             {
                 var bounties = db.Bounties
                     .Include(b => b.Shikigami)
+                    .Include(b => b.BountyClues)
                     .ToList();
 
                 return from b in bounties
@@ -240,7 +241,9 @@ namespace OnmyojiHelper.Services
         {
             using (var db = new OnmyojiContext())
             {
-                var bounty = db.Bounties.FirstOrDefault(a => a.Id == b.Id);
+                var bounty = db.Bounties
+                    .Include(a => a.BountyClues)
+                    .FirstOrDefault(a => a.Id == b.Id);
 
                 if (bounty == null)
                 {
@@ -248,8 +251,13 @@ namespace OnmyojiHelper.Services
                     return;
                 }
 
-                bounty.BountyClues = b.BountyClues;
-                bounty.Shikigami = b.Shikigami;
+                bounty.BountyClues.Clear();
+                db.SaveChanges();
+                foreach (var item in b.BountyClues)
+                {
+                    bounty.BountyClues.Add(item);
+                }
+                bounty.ShikigamiId = b.ShikigamiId;
                 db.SaveChanges();
                 LoggingService.WriteLine($"[Edit] Bounty { b.Id }.", Severities.Info);
             }

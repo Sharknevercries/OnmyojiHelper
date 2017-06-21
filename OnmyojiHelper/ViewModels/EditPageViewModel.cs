@@ -170,7 +170,8 @@ namespace OnmyojiHelper.ViewModels
 
         public void GoToBountyEdit(ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Bounties.BountyEditPage), (Bounty)e.ClickedItem);
         }
     }
 }

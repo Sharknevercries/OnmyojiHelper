@@ -13,7 +13,6 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <converters:ClueSelectionChangedConverter x:Key="ClueSelectionChangedConverter" />
         <DataTemplate x:Key="ShikigamiItemTemplate" x:DataType="m:Shikigami">
             <TextBlock Text="{x:Bind Name}" />
         </DataTemplate>
@@ -52,7 +51,6 @@
                 Margin="12,6"
                 VerticalAlignment="Center"
                 ItemTemplate="{StaticResource ShikigamiItemTemplate}"
-                ItemsSource="{Binding Shikigamis}"
                 SelectedItem="{Binding SelectedShikigami, Mode=TwoWay}" />
         </StackPanel>
 
@@ -70,17 +68,8 @@
                 Margin="12,6"
                 VerticalAlignment="Center"
                 ItemTemplate="{StaticResource ClueItemTemplate}"
-                ItemsSource="{Binding Clues}"
-                SelectionMode="Multiple">
-                <Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="SelectionChanged">
-                        <Core:InvokeCommandAction
-                            Command="{Binding ClueSelectionChangedCommand}"
-                            InputConverter="{StaticResource ClueSelectionChangedConverter}"
-                            InputConverterParameter="{x:Bind bountyEditClue}" />
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
-            </ListView>
+                SelectionChanged="bountyEditClue_SelectionChanged"
+                SelectionMode="Multiple" />
         </StackPanel>
     </RelativePanel>
 </Page>

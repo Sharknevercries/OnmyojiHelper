@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using OnmyojiHelper.Models;
+using OnmyojiHelper.Services;
+using OnmyojiHelper.ViewModels.Bounties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +26,20 @@ namespace OnmyojiHelper.Views.Bounties
     /// </summary>
     public sealed partial class BountyAddPage : Page
     {
+        private IDataService _dataService => SimpleIoc.Default.GetInstance<IDataService>();
+
         public BountyAddPage()
         {
             this.InitializeComponent();
+
+            bountyEditClue.ItemsSource = _dataService.GetAllClues().ToList();
+            bountyEditShikigami.ItemsSource = _dataService.GetAllShikigamis().ToList();
+        }
+
+        private void bountyEditClue_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = (BountyAddPageViewModel)DataContext;
+            viewModel.SelectedClues = bountyEditClue.SelectedItems.Cast<Clue>().ToList();
         }
     }
 }

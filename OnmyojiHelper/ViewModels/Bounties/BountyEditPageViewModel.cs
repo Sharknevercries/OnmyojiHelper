@@ -16,16 +16,9 @@ namespace OnmyojiHelper.ViewModels.Bounties
     public class BountyEditPageViewModel : Mvvm.ViewModelBase
     {
         private IDataService _dataService;
-        private List<Clue> _selectedClues;
-
+ 
         public int Id { get; set; }
-
-        private ObservableCollection<Shikigami> _shikigamis;
-        public ObservableCollection<Shikigami> Shikigamis
-        {
-            get { return _shikigamis; }
-            set { Set(ref _shikigamis, value); }
-        }
+        public List<Clue> SelectedClues { get; set; }
 
         private Shikigami _selectedShikigami;
         public Shikigami SelectedShikigami
@@ -38,38 +31,25 @@ namespace OnmyojiHelper.ViewModels.Bounties
             }
         }
 
-        private ObservableCollection<Clue> _clues;
-        public ObservableCollection<Clue> Clues
-        {
-            get { return _clues; }
-            set { Set(ref _clues, value); }
-        }
-
         public DelegateCommand SaveCommand { get; private set; }
         public DelegateCommand DeleteCommand { get; private set; }
-        public DelegateCommand<object> ClueSelectionChangedCommand { get; private set; }
 
         public BountyEditPageViewModel(IDataService dataService)
         {
             this._dataService = dataService;
-
-            _selectedClues = new List<Clue>();
-            Shikigamis = new ObservableCollection<Shikigami>(_dataService.GetAllShikigamis());
-            Clues = new ObservableCollection<Clue>(_dataService.GetAllClues());
-
+;
             SaveCommand = new DelegateCommand(Save, SaveCommand_CanExecute);
             DeleteCommand = new DelegateCommand(Delete);
-            ClueSelectionChangedCommand = new DelegateCommand<object>(ClueSelectionChanged);
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var bounty = parameter as Bounty;
             this.Id = bounty.Id;
-            SelectedShikigami = Shikigamis.Where(s => s.Id == bounty.ShikigamiId).FirstOrDefault();
-            _selectedClues = (from c in bounty.BountyClues
-                              select new Clue() { Id = c.ClueId })
-                             .ToList();
+            SelectedShikigami = new Shikigami(bounty.ShikigamiId);
+            SelectedClues = (from c in bounty.BountyClues
+                             select new Clue() { Id = c.ClueId })
+                            .ToList();
 
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
@@ -77,7 +57,7 @@ namespace OnmyojiHelper.ViewModels.Bounties
         public void Save()
         {
             List<BountyClue> bc = new List<BountyClue>();
-            foreach (var c in _selectedClues)
+            foreach (var c in SelectedClues)
             {
                 bc.Add(new BountyClue() { BountyId = this.Id, ClueId = c.Id });
             }
@@ -110,15 +90,6 @@ namespace OnmyojiHelper.ViewModels.Bounties
 
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
             nav.GoBack();
-        }
-
-        public void ClueSelectionChanged(object e)
-        {
-            _selectedClues.Clear();
-            foreach(Clue c in (e as IList<object>))
-            {
-                _selectedClues.Add(c);
-            }
         }
     }
 }

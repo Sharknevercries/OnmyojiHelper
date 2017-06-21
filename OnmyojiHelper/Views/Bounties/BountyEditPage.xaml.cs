@@ -2,6 +2,7 @@
 using OnmyojiHelper.Models;
 using OnmyojiHelper.Models.Relations;
 using OnmyojiHelper.Services;
+using OnmyojiHelper.ViewModels.Bounties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,20 +29,21 @@ namespace OnmyojiHelper.Views.Bounties
     public sealed partial class BountyEditPage : Page
     {
         private ISerializationService _serializationService;
-        private IDataService _dataSerivce;
+        private IDataService _dataSerivce => SimpleIoc.Default.GetInstance<IDataService>();
 
         public BountyEditPage()
         {
             this.InitializeComponent();
             _serializationService = SerializationService.Json;
-            _dataSerivce = SimpleIoc.Default.GetInstance<IDataService>();
 
-            bountyEditClue.ItemsSource = _dataSerivce.GetAllClues();
+            bountyEditClue.ItemsSource = _dataSerivce.GetAllClues().ToList();
+            bountyEditShikigami.ItemsSource = _dataSerivce.GetAllShikigamis().ToList();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var bounty = _serializationService.Deserialize<Bounty>(e.Parameter?.ToString());
+            bountyEditShikigami.SelectedItem = bountyEditShikigami.Items.Cast<Shikigami>().FirstOrDefault(s => s.Id == bounty.ShikigamiId);
             bountyEditClue.SelectedItems.Clear();
 
             foreach (var item in bountyEditClue.ItemsSource as IEnumerable<Clue>)
@@ -53,6 +55,20 @@ namespace OnmyojiHelper.Views.Bounties
             }
 
             base.OnNavigatedTo(e);
+        }
+
+        private void bountyEditClue_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = (BountyEditPageViewModel)DataContext;
+            if(viewModel != null)
+                viewModel.SelectedClues = bountyEditClue.SelectedItems.Cast<Clue>().ToList();
+        }
+
+        private void bountyEditShikigami_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = (BountyEditPageViewModel)DataContext;
+            if (viewModel != null)
+                viewModel.SelectedShikigami = bountyEditShikigami.SelectedItem as Shikigami;
         }
     }
 }

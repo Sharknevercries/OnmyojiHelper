@@ -73,7 +73,7 @@ namespace OnmyojiHelper.ViewModels.Clues
         {
             _dataService.DeleteClue(new Clue()
             {
-                Keyword = this.Keyword,
+                Id = this.Id,
             });
 
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();

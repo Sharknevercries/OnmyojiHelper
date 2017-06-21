@@ -54,19 +54,16 @@ namespace OnmyojiHelper.ViewModels.Stages
 
         public void Save()
         {
-            if (string.IsNullOrEmpty(Title))
+            _dataService.EditStage(new Stage()
             {
-                _dataService.EditStage(new Stage()
-                {
-                    Id = this.Id,
-                    Title = this.Title,
-                    Category = this.Category,
-                });
+                Id = this.Id,
+                Title = this.Title,
+                Category = this.Category,
+            });
 
-                var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-                nav.GoBack();
-            }
-        }
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.GoBack();
+        } 
 
         public bool SaveCommand_CanExecute()
         {
@@ -82,8 +79,6 @@ namespace OnmyojiHelper.ViewModels.Stages
             _dataService.DeleteStage(new Stage()
             {
                 Id = this.Id,
-                Title = this.Title,
-                Category = this.Category,
             });
 
             var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();

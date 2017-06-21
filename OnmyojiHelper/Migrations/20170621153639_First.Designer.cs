@@ -9,8 +9,8 @@ using OnmyojiHelper.Models.Enums;
 namespace OnmyojiHelper.Migrations
 {
     [DbContext(typeof(OnmyojiContext))]
-    [Migration("20170619175053_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20170621153639_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace OnmyojiHelper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("StageId");
+                    b.Property<int>("StageId");
 
                     b.Property<string>("Title");
 

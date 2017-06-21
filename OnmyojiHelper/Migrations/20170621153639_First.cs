@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnmyojiHelper.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,7 @@ namespace OnmyojiHelper.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    StageId = table.Column<int>(nullable: true),
+                    StageId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -14,6 +14,7 @@ namespace OnmyojiHelper
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Clue> Clues { get; set; }
         public DbSet<Bounty> Bounties { get; set; }
+        public DbSet<Battle> Battles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

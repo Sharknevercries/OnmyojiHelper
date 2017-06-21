@@ -297,22 +297,60 @@ namespace OnmyojiHelper.Services
 
         public IEnumerable<Battle> GetAllBattles()
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                return db.Battles
+                    .Include(b => b.ShikigamiBattles)
+                    .Include(b => b.Stage)
+                    .OrderBy(b => b.Id)
+                    .ToList();
+            }
         }
 
         public void EditBattle(Battle b)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var battle = db.Battles.First(a => a.Id == b.Id);
+
+                if (battle == null)
+                {
+                    LoggingService.WriteLine($"[Edit] Battle { b.Id } is null.", Severities.Warning);
+                    return;
+                }
+
+                battle.ShikigamiBattles.Clear();
+                db.SaveChanges();
+                battle.StageId = b.StageId;
+                battle.Title = b.Title;
+                battle.ShikigamiBattles = b.ShikigamiBattles;
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Edit] Battle { b.Id }.", Severities.Info);
+            }
         }
 
         public void AddBattle(Battle b)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                db.Battles.Add(b);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Add] Battle {b.Id}.", Severities.Info);
+            }
         }
 
         public void DeleteBattle(Battle b)
         {
-            throw new NotImplementedException();
+            using (var db = new OnmyojiContext())
+            {
+                var battle = db.Battles.FirstOrDefault(a => a.Id == b.Id);
+                db.Battles.Remove(battle);
+                db.SaveChanges();
+
+                LoggingService.WriteLine($"[Delete] Battle { b.Id }", Severities.Info);
+            }
         }
 
         #endregion

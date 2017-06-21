@@ -21,7 +21,7 @@ namespace OnmyojiHelper.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("StageId");
+                    b.Property<int>("StageId");
 
                     b.Property<string>("Title");
 

@@ -353,6 +353,11 @@ namespace OnmyojiHelper.Services
             }
         }
 
+        public bool IsLegalBattle(Battle b)
+        {
+            return !string.IsNullOrEmpty(b.Title) && b.Stage != null;
+        }
+
         #endregion
     }
 }

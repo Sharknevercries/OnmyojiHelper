@@ -85,7 +85,7 @@ namespace OnmyojiHelper.Migrations
                         column: x => x.StageId,
                         principalTable: "Stage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

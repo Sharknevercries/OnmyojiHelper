@@ -25,10 +25,6 @@ namespace OnmyojiHelper
         {
             modelBuilder.Entity<Models.Relations.ShikigamiBattle>().HasKey(x => new { x.ShikigamiId, x.BattleId });
             modelBuilder.Entity<Models.Relations.BountyClue>().HasKey(x => new { x.BountyId, x.ClueId });
-            modelBuilder.Entity<Stage>()
-                .HasMany(s => s.Battles)
-                .WithOne(b => b.Stage)
-                .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.SetNull);
         }
     }
 }

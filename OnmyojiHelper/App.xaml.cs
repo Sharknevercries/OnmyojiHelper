@@ -21,6 +21,7 @@ using OnmyojiHelper.ViewModels.Stages;
 using OnmyojiHelper.ViewModels.Shikigamis;
 using OnmyojiHelper.ViewModels.Clues;
 using OnmyojiHelper.ViewModels.Bounties;
+using OnmyojiHelper.ViewModels.Battles;
 
 namespace OnmyojiHelper
 {
@@ -116,6 +117,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<BountyAddPageViewModel>();
                 case Views.Bounties.BountyEditPage p:
                     return SimpleIoc.Default.GetInstance<BountyEditPageViewModel>();
+                case Views.Battles.BattleAddPage p:
+                    return SimpleIoc.Default.GetInstance<BattleAddPageViewModel>();
             }
 
             return base.ResolveForPage(page, navigationService);

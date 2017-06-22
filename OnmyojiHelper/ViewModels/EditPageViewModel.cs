@@ -202,7 +202,8 @@ namespace OnmyojiHelper.ViewModels
 
         public void GoToBattleAdd()
         {
-            throw new NotImplementedException();
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+            nav.Navigate(typeof(Views.Battles.BattleAddPage));
         }
 
         public void GoToBattleEdit(ItemClickEventArgs e)

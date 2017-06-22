@@ -119,7 +119,7 @@ namespace OnmyojiHelper.Migrations
                     b.HasOne("OnmyojiHelper.Models.Stage", "Stage")
                         .WithMany("Battles")
                         .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("OnmyojiHelper.Models.Bounty", b =>

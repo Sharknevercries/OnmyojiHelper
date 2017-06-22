@@ -9,7 +9,7 @@ using OnmyojiHelper.Models.Enums;
 namespace OnmyojiHelper.Migrations
 {
     [DbContext(typeof(OnmyojiContext))]
-    [Migration("20170621153639_First")]
+    [Migration("20170622073852_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,7 @@ namespace OnmyojiHelper.Migrations
                     b.HasOne("OnmyojiHelper.Models.Stage", "Stage")
                         .WithMany("Battles")
                         .HasForeignKey("StageId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("OnmyojiHelper.Models.Bounty", b =>

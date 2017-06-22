@@ -99,9 +99,9 @@
     <Compile Include="Converters\ClueConverter.cs" />
     <Compile Include="Converters\ShikigamiConverter.cs" />
     <Compile Include="Converters\StageConverter.cs" />
-    <Compile Include="Migrations\20170621153639_First.cs" />
-    <Compile Include="Migrations\20170621153639_First.designer.cs">
-      <DependentUpon>20170621153639_First.cs</DependentUpon>
+    <Compile Include="Migrations\20170622073852_First.cs" />
+    <Compile Include="Migrations\20170622073852_First.designer.cs">
+      <DependentUpon>20170622073852_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\OnmyojiContextModelSnapshot.cs" />
     <Compile Include="Models\Battle.cs" />
@@ -121,6 +121,7 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="ViewModels\Battles\BattleAddPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyAddPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyEditPageViewModel.cs" />
     <Compile Include="ViewModels\Clues\ClueAddPageViewModel.cs" />

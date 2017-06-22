@@ -40,5 +40,6 @@ namespace OnmyojiHelper.Services
         void EditBattle(Battle b);
         void AddBattle(Battle b);
         void DeleteBattle(Battle b);
+        bool IsLegalBattle(Battle b);
     }
 }

@@ -61,12 +61,23 @@
                 Text="關卡種類" />
 
             <ComboBox
+                x:Name="stageEditCategory"
                 Margin="12,6"
                 VerticalAlignment="Center"
                 SelectedIndex="{Binding Category, Converter={StaticResource StageCategoryConverter}, Mode=TwoWay}">
-                <ComboBoxItem Content="NormalDiscovery" />
-                <ComboBoxItem Content="HardDiscovery" />
-                <ComboBoxItem Content="RoyalSoul" />
+                <ComboBoxItem Content="普通探索" />
+                <ComboBoxItem Content="困難探索" />
+                <ComboBoxItem Content="御魂" />
+                <ComboBoxItem Content="叢原火" />
+                <ComboBoxItem Content="妖氣封印" />
+                <ComboBoxItem Content="挑戰券" />
+                <ComboBoxItem Content="山兔大暴走" />
+                <ComboBoxItem Content="河畔童謠" />
+                <ComboBoxItem Content="妖刀的秘笈" />
+                <ComboBoxItem Content="紅葉的羈絆" />
+                <ComboBoxItem Content="雨女的等候" />
+                <ComboBoxItem Content="荒川之怒" />
+                <ComboBoxItem Content="暴風之巔" />
             </ComboBox>
         </StackPanel>
     </RelativePanel>

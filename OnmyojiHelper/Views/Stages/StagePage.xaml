@@ -7,6 +7,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="using:OnmyojiHelper.Converters"
     xmlns:local="using:OnmyojiHelper.Views"
     xmlns:m="using:OnmyojiHelper.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,6 +18,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <converters:StageCategoryDescriptionConverter x:Key="StageCategoryDescriptionConverter" />
         <CollectionViewSource
             x:Name="cVSStageGroups"
             IsSourceGrouped="True"
@@ -28,10 +30,10 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="stageZoomInGroupHeaderTemplate" x:DataType="mg:StageGroup">
-            <TextBlock Text="{x:Bind Category}" />
+            <TextBlock Text="{x:Bind Category, Converter={StaticResource StageCategoryDescriptionConverter}}" />
         </DataTemplate>
         <DataTemplate x:Key="stageZoomOutItemTemplate" x:DataType="wuxdata:ICollectionViewGroup">
-            <TextBlock Text="{x:Bind Group.(mg:StageGroup.Category)}" />
+            <TextBlock Text="{x:Bind Group.(mg:StageGroup.Category), Converter={StaticResource StageCategoryDescriptionConverter}}" />
         </DataTemplate>
         <DataTemplate x:Key="battleItemTemplate" x:DataType="m:Battle">
             <TextBlock Text="{x:Bind Title}" />

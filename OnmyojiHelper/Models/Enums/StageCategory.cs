@@ -48,7 +48,7 @@ namespace OnmyojiHelper.Models.Enums
         /// <summary>
         /// 山兔大暴走
         /// </summary>
-        [Description("普通探索")]
+        [Description("山兔大暴走")]
         Yamausagi,
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace OnmyojiHelper.Models.Enums
         /// <summary>
         /// 妖刀的秘笈 
         /// </summary>
-        [Description("普通探索")]
+        [Description("妖刀的秘笈")]
         Youtouhime,
 
         /// <summary>

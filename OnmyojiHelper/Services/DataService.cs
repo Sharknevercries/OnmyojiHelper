@@ -311,7 +311,9 @@ namespace OnmyojiHelper.Services
         {
             using (var db = new OnmyojiContext())
             {
-                var battle = db.Battles.First(a => a.Id == b.Id);
+                var battle = db.Battles
+                    .Include(a => a.ShikigamiBattles)
+                    .First(a => a.Id == b.Id);
 
                 if (battle == null)
                 {

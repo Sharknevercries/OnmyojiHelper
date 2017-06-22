@@ -122,6 +122,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\Battles\BattleAddPageViewModel.cs" />
+    <Compile Include="ViewModels\Battles\BattleEditPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyAddPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyEditPageViewModel.cs" />
     <Compile Include="ViewModels\Clues\ClueAddPageViewModel.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Battles\BattleAddPage.xaml.cs">
       <DependentUpon>BattleAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Battles\BattleEditPage.xaml.cs">
+      <DependentUpon>BattleEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Bounties\BountyAddPage.xaml.cs">
       <DependentUpon>BountyAddPage.xaml</DependentUpon>
@@ -208,6 +212,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\Battles\BattleAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Battles\BattleEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

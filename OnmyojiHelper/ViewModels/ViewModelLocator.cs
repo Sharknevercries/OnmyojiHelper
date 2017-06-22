@@ -37,6 +37,7 @@ namespace OnmyojiHelper.ViewModels
             SimpleIoc.Default.Register<Bounties.BountyAddPageViewModel>();
             SimpleIoc.Default.Register<Bounties.BountyEditPageViewModel>();
             SimpleIoc.Default.Register<Battles.BattleAddPageViewModel>();
+            SimpleIoc.Default.Register<Battles.BattleEditPageViewModel>();
         }
     }
 }

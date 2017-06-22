@@ -119,6 +119,8 @@ namespace OnmyojiHelper
                     return SimpleIoc.Default.GetInstance<BountyEditPageViewModel>();
                 case Views.Battles.BattleAddPage p:
                     return SimpleIoc.Default.GetInstance<BattleAddPageViewModel>();
+                case Views.Battles.BattleEditPage p:
+                    return SimpleIoc.Default.GetInstance<BattleEditPageViewModel>();
             }
 
             return base.ResolveForPage(page, navigationService);

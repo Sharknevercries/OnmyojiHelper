@@ -52,5 +52,12 @@ namespace OnmyojiHelper.Views.Battles
             if (viewModel != null)
                 viewModel.SelectedShikigamiBattles = battleEditShikigami.SelectedItems.Cast<ShikigamiBattle>().Where(sb => sb.Count > 0).Select(sb => new ShikigamiBattle() { ShikigamiId = sb.Shikigami.Id, Count = sb.Count }).ToList();
         }
+
+        private void battleEditStage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = (BattleAddPageViewModel)DataContext;
+            if (viewModel != null)
+                viewModel.SelectedStage = battleEditStage.SelectedItem as Stage;
+        }
     }
 }

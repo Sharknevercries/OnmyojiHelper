@@ -46,45 +46,9 @@ namespace OnmyojiHelper.Models.Enums
         Challenge,
 
         /// <summary>
-        /// 山兔大暴走
+        /// 祕聞副本
         /// </summary>
-        [Description("山兔大暴走")]
-        Yamausagi,
-
-        /// <summary>
-        /// 河畔童謠
-        /// </summary>
-        [Description("河畔童謠")]
-        Kappa,
-
-        /// <summary>
-        /// 妖刀的秘笈 
-        /// </summary>
-        [Description("妖刀的秘笈")]
-        Youtouhime,
-
-        /// <summary>
-        /// 紅葉的羈絆
-        /// </summary>
-        [Description("紅葉的羈絆")]
-        Kijomomiji,
-
-        /// <summary>
-        /// 雨女的等候
-        /// </summary>
-        [Description("雨女的等候")]
-        Ameonna,
-
-        /// <summary>
-        /// 荒川之怒
-        /// </summary>
-        [Description("荒川之怒")]
-        Arakawanoaruji,
-
-        /// <summary>
-        /// 暴風之巔
-        /// </summary>
-        [Description("暴風之巔")]
-        Ootengu,
+        [Description("祕聞副本")]
+        Secret,
     }
 }

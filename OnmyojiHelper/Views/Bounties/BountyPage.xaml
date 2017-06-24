@@ -5,11 +5,51 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:OnmyojiHelper.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:OnmyojiHelper.Views.Bounties"
     xmlns:m="using:OnmyojiHelper.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:me="using:OnmyojiHelper.Models.Relations"
+    xmlns:mg="using:OnmyojiHelper.Models.Groups"
+    xmlns:wuxdata="using:Windows.UI.Xaml.Data"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BountyImageBrushConverter x:Key="BountyImageBrushConverter" />
+        <CollectionViewSource
+            x:Name="cVSBountyGroups"
+            IsSourceGrouped="True"
+            ItemsPath="Bounties"
+            Source="{Binding BountyGroups}" />
+        <DataTemplate x:Key="BountyZoomInItemTemplate" x:DataType="m:Bounty">
+            <StackPanel Orientation="Vertical">
+                <Ellipse
+                    Width="75"
+                    Height="75"
+                    Fill="{x:Bind Shikigami.ImageUri, Converter={StaticResource BountyImageBrushConverter}}" />
+                <TextBlock Text="{x:Bind Shikigami.Name}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BountyZoomInGroupHeaderTemplate" x:DataType="mg:BountyGroup">
+            <TextBlock Text="{x:Bind Rarity}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BountyZoomOutItemTemplate" x:DataType="wuxdata:ICollectionViewGroup">
+            <TextBlock Text="{x:Bind Group.(mg:BountyGroup.Rarity)}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BountyLocationCountItemTemplate" x:DataType="me:ShikigamiBattle">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{x:Bind Battle.Stage.Title}"  />
+                <TextBlock Grid.Row="1" Text="{x:Bind Battle.Title}" />
+                <TextBlock Grid.Row="2" Text="{x:Bind Count}" RelativePanel.Below="battleTitle" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader
@@ -19,24 +59,64 @@
             RelativePanel.AlignTopWithPanel="True"
             Text="懸賞" />
 
-        <AutoSuggestBox
-            x:Name="searchAutoSuggestBox"
-            MinWidth="250"
-            PlaceholderText="Type a keyword here..."
-            QueryIcon="Find"
-            RelativePanel.AlignLeftWithPanel="True"
-            RelativePanel.Below="pageHeader" />
-
-        <GridView
-            x:Name="bountyGridView"
-            MinWidth="250"
-            RelativePanel.AlignLeftWithPanel="True"
-            RelativePanel.Below="searchAutoSuggestBox" />
-
-        <ListView
-            x:Name="bountySearchResultListView"
-            RelativePanel.Below="pageHeader"
-            RelativePanel.RightOf="searchAutoSuggestBox" />
+        <Grid RelativePanel.Below="pageHeader">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <RelativePanel x:Name="bounty" Grid.Column="0">
+                <AutoSuggestBox
+                    x:Name="searchAutoSuggestBox"
+                    PlaceholderText="Type a keyword here..."
+                    QueryIcon="Find"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True" />
+                <SemanticZoom
+                    x:Name="bountySemanticZoom"
+                    HorizontalContentAlignment="Stretch"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.Below="searchAutoSuggestBox">
+                    <SemanticZoom.ZoomedInView>
+                        <GridView
+                            x:Name="bountyGridView"
+                            ItemTemplate="{StaticResource BountyZoomInItemTemplate}"
+                            ItemsSource="{x:Bind cVSBountyGroups.View, Mode=OneWay}"
+                            SelectionMode="Single">
+                            <GridView.GroupStyle>
+                                <GroupStyle HeaderTemplate="{StaticResource BountyZoomInGroupHeaderTemplate}" />
+                            </GridView.GroupStyle>
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <Core:InvokeCommandAction Command="{Binding BountySelectionChangedCommand}" CommandParameter="{Binding ElementName=bountyGridView, Path=SelectedItem}" />
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                        </GridView>
+                    </SemanticZoom.ZoomedInView>
+                    <SemanticZoom.ZoomedOutView>
+                        <ListView
+                            ItemTemplate="{StaticResource BountyZoomOutItemTemplate}"
+                            ItemsSource="{x:Bind cVSBountyGroups.View.CollectionGroups, Mode=OneWay}"
+                            SelectionMode="None" />
+                    </SemanticZoom.ZoomedOutView>
+                </SemanticZoom>
+            </RelativePanel>
+            <ListView
+                x:Name="bountySearchResultListView"
+                Grid.Column="1"
+                ItemTemplate="{StaticResource BountyLocationCountItemTemplate}"
+                ItemsSource="{Binding BountyLocationCount, Mode=OneWay}"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
 
     </RelativePanel>
 </Page>

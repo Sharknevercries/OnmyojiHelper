@@ -1,5 +1,6 @@
 ﻿using OnmyojiHelper.Models;
 using OnmyojiHelper.Models.Groups;
+using OnmyojiHelper.Models.Relations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace OnmyojiHelper.Services
         void DeleteClue(Clue c);
         bool IsLegalClue(Clue c);
 
+        IEnumerable<BountyGroup> GetAllBountyGroups();
         IEnumerable<Bounty> GetAllBounties();
         void EditBounty(Bounty b);
         void AddBounty(Bounty b);
@@ -41,5 +43,7 @@ namespace OnmyojiHelper.Services
         void AddBattle(Battle b);
         void DeleteBattle(Battle b);
         bool IsLegalBattle(Battle b);
+
+        IEnumerable<ShikigamiBattle> GetBountyLocationCountFrom(int shikigamiId);
     }
 }

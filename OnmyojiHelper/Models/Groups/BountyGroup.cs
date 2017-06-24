@@ -10,12 +10,6 @@ namespace OnmyojiHelper.Models.Groups
     {
         public Enums.Rarity Rarity { get; set; }
 
-        public List<object> Bounties { get; set; }
-
-        public BountyGroup(Enums.Rarity rarity, IEnumerable<object> bounties)
-        {
-            this.Rarity = rarity;
-            this.Bounties = new List<object>(bounties);
-        }
+        public List<Bounty> Bounties { get; set; }
     }
 }

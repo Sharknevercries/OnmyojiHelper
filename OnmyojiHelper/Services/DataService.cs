@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Services.LoggingService;
+using OnmyojiHelper.Models.Relations;
 
 namespace OnmyojiHelper.Services
 {
@@ -222,6 +223,32 @@ namespace OnmyojiHelper.Services
 
         #region Bounty
 
+        public IEnumerable<BountyGroup> GetAllBountyGroups()
+        {
+            using (var db = new OnmyojiContext())
+            {
+                var bounties = db.Bounties
+                                    .Include(b => b.Shikigami)
+                                        .ThenInclude(s => s.ShikigamiBattles)
+                                    .Include(bounty => bounty.BountyClues)
+                                        .ThenInclude(bc => bc.Clue)
+                                    .ToList();
+
+                foreach (var b in bounties)
+                {
+                    b.Shikigami.ImageUri = new Uri($"ms-appx:///Assets/icons/{ b.ShikigamiId }.png");
+                }
+
+                return (from b in bounties
+                        group b by b.Shikigami.Rarity into g
+                        select new BountyGroup()
+                        {
+                            Rarity = g.Key,
+                            Bounties = g.OrderBy(b => b.ShikigamiId).ToList(),
+                        });
+            }
+        }
+
         public IEnumerable<Bounty> GetAllBounties()
         {
             using (var db = new OnmyojiContext())
@@ -361,5 +388,21 @@ namespace OnmyojiHelper.Services
         }
 
         #endregion
+
+        public IEnumerable<ShikigamiBattle> GetBountyLocationCountFrom(int shikigamiId)
+        {
+            using (var db = new OnmyojiContext())
+            {
+                var target = db.Shikigamis.Single(s => s.Id == shikigamiId);
+
+                return db.Entry(target)
+                    .Collection(s => s.ShikigamiBattles)
+                    .Query()
+                    .Include(sb => sb.Battle)
+                        .ThenInclude(b => b.Stage)
+                    .OrderByDescending(sb => sb.Count)
+                    .ToList();
+            }
+        }
     }
 }

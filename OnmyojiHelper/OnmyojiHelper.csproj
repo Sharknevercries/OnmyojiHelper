@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BountyConverter.cs" />
     <Compile Include="Converters\ClueConverter.cs" />
     <Compile Include="Converters\ShikigamiConverter.cs" />
     <Compile Include="Converters\StageConverter.cs" />

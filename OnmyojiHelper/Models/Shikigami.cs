@@ -19,6 +19,9 @@ namespace OnmyojiHelper.Models
 
         public List<Relations.ShikigamiBattle> ShikigamiBattles { get; set; }
 
+        [NotMapped]
+        public Uri ImageUri { get; set; }
+
         public Shikigami() : this(0) { }
 
         public Shikigami(int id) : this(id, default(string), default(Enums.Rarity)) { }

@@ -26,6 +26,7 @@ namespace OnmyojiHelper.ViewModels
 
             //Register your services used here
             SimpleIoc.Default.Register<Stages.StagePageViewModel>();
+            SimpleIoc.Default.Register<Bounties.BountyPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
             SimpleIoc.Default.Register<EditPageViewModel>();
             SimpleIoc.Default.Register<Stages.StageEditPageViewModel>();

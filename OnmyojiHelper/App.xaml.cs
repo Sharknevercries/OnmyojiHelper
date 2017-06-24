@@ -97,6 +97,8 @@ namespace OnmyojiHelper
             {
                 case Views.Stages.StagePage p:
                     return SimpleIoc.Default.GetInstance<StagePageViewModel>();
+                case Views.Bounties.BountyPage p:
+                    return SimpleIoc.Default.GetInstance<BountyPageViewModel>();
                 case SettingsPage p:
                     return SimpleIoc.Default.GetInstance<SettingsPageViewModel>();
                 case EditPage p:

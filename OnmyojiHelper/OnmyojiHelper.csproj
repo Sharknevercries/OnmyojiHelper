@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\Battles\BattleEditPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyAddPageViewModel.cs" />
     <Compile Include="ViewModels\Bounties\BountyEditPageViewModel.cs" />
+    <Compile Include="ViewModels\Bounties\BountyPageViewModel.cs" />
     <Compile Include="ViewModels\Clues\ClueAddPageViewModel.cs" />
     <Compile Include="ViewModels\Clues\ClueEditPageViewModel.cs" />
     <Compile Include="ViewModels\EditPageViewModel.cs" />
@@ -146,6 +147,9 @@
     </Compile>
     <Compile Include="Views\Bounties\BountyEditPage.xaml.cs">
       <DependentUpon>BountyEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bounties\BountyPage.xaml.cs">
+      <DependentUpon>BountyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
@@ -310,6 +314,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Bounties\BountyEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Bounties\BountyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

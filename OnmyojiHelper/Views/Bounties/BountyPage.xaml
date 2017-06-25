@@ -44,9 +44,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{x:Bind Battle.Stage.Title}"  />
+                <TextBlock Grid.Row="0" Text="{x:Bind Battle.Stage.Title}" />
                 <TextBlock Grid.Row="1" Text="{x:Bind Battle.Title}" />
-                <TextBlock Grid.Row="2" Text="{x:Bind Count}" RelativePanel.Below="battleTitle" />
+                <TextBlock
+                    Grid.Row="2"
+                    RelativePanel.Below="battleTitle"
+                    Text="{x:Bind Count}" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -61,17 +64,24 @@
 
         <Grid RelativePanel.Below="pageHeader">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" MinWidth="300" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <RelativePanel x:Name="bounty" Grid.Column="0">
                 <AutoSuggestBox
                     x:Name="searchAutoSuggestBox"
+                    ItemsSource="{Binding Suggestions, Mode=OneWay}"
                     PlaceholderText="Type a keyword here..."
                     QueryIcon="Find"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
-                    RelativePanel.AlignTopWithPanel="True" />
+                    RelativePanel.AlignTopWithPanel="True">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="QuerySubmitted">
+                            <Core:InvokeCommandAction Command="{Binding SearchAutoSuggestBoxQuerySubmittedCommand}" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </AutoSuggestBox>
                 <SemanticZoom
                     x:Name="bountySemanticZoom"
                     HorizontalContentAlignment="Stretch"
@@ -106,10 +116,10 @@
             <ListView
                 x:Name="bountySearchResultListView"
                 Grid.Column="1"
-                ItemTemplate="{StaticResource BountyLocationCountItemTemplate}"
-                ItemsSource="{Binding BountyLocationCount, Mode=OneWay}"
                 HorizontalAlignment="Right"
-                HorizontalContentAlignment="Stretch">
+                HorizontalContentAlignment="Stretch"
+                ItemTemplate="{StaticResource BountyLocationCountItemTemplate}"
+                ItemsSource="{Binding BountyLocationCount, Mode=OneWay}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

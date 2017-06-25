@@ -4,6 +4,7 @@ using OnmyojiHelper.Models.Relations;
 using OnmyojiHelper.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,6 @@ namespace OnmyojiHelper.ViewModels.Bounties
             set { Set(ref _bountyGroups, value); }
         }
 
-        public DelegateCommand<Bounty> BountySelectionChangedCommand { get; private set; }
-
         private List<ShikigamiBattle> _bountyLocationCount;
         public List<ShikigamiBattle> BountyLocationCount
         {
@@ -35,11 +34,46 @@ namespace OnmyojiHelper.ViewModels.Bounties
             set { Set(ref _bountyLocationCount, value); }
         }
 
+        public ObservableCollection<string> Suggestions { get; set; } 
+
+        public DelegateCommand<Bounty> BountySelectionChangedCommand { get; private set; }
+        public DelegateCommand<AutoSuggestBoxQuerySubmittedEventArgs> SearchAutoSuggestBoxQuerySubmittedCommand { get; private set; }
+        public DelegateCommand<AutoSuggestBoxSuggestionChosenEventArgs> SearchAutoSuggestBoxQuerySuggestionChosenCommand { get; private set; }
+        public DelegateCommand<AutoSuggestBoxTextChangedEventArgs> SearchAutoSuggestBoxQueryTextChangedCommand { get; private set; }
+
         public BountyPageViewModel(IDataService dataService)
         {
             this._dataService = dataService;
 
             BountySelectionChangedCommand = new DelegateCommand<Bounty>(BountySelectionChanged);
+            SearchAutoSuggestBoxQuerySubmittedCommand = new DelegateCommand<AutoSuggestBoxQuerySubmittedEventArgs>(QuerySubmitted);
+        }
+
+
+        public void QuerySubmitted(AutoSuggestBoxQuerySubmittedEventArgs e)
+        {
+            var keyword = e.QueryText;
+
+            var byName = from bg in _allBountyGroups
+                         let bs = bg.Bounties
+                         from b in bs
+                         where b.Shikigami.Name.Contains(keyword)
+                         select b;
+            var byClue = from bg in _allBountyGroups
+                         let bs = bg.Bounties
+                         from b in bs
+                         let bcs = b.BountyClues
+                         from bc in bcs
+                         where bc.Clue.Keyword.Contains(keyword)
+                         select b;
+
+            BountyGroups = (from b in byName.Union(byClue)
+                            group b by b.Shikigami.Rarity into g
+                            select new BountyGroup()
+                            {
+                                Rarity = g.Key,
+                                Bounties = g.OrderBy(b => b.ShikigamiId).ToList(),
+                            });
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
